@@ -37,16 +37,16 @@
   .toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
 
   /* interactive panel */
-  .stage{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px;align-items:start}
+  .stage{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start}
   @media (max-width:700px){.stage{grid-template-columns:minmax(0,1fr)}}
-  .figcol{display:flex;flex-direction:column;gap:12px;max-width:360px;width:100%;margin-inline:auto}
+  .figcol{display:flex;flex-direction:column;gap:12px;max-width:300px;width:100%;margin-inline:auto}
   .seg{display:flex;gap:0;border:1px solid var(--panel-edge);border-radius:999px;overflow:hidden;align-self:flex-start}
   .seg button{font:inherit;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;
     background:var(--card);color:var(--muted);border:0;cursor:pointer}
   .seg button+button{border-left:1px solid var(--panel-edge)}
   .seg button[aria-pressed="true"]{background:var(--accent);color:#1a1206;font-weight:700}
   .fig{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);
-    aspect-ratio:960/1518;background:#171717}
+    aspect-ratio:720/1518;background:#171717}
   .fig img{display:block;width:100%;height:100%}
   [hidden]{display:none!important}
   .hs{position:absolute;transform:translate(-50%,-50%);aspect-ratio:1;border-radius:50%;padding:0;
