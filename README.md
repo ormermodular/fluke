@@ -9,8 +9,8 @@ from perfectly still to slowly wandering. Each track has its own style of random
 Direction, Slide and Quantise, with the key set per track or for the whole module.
 
 Everything is on a 12 HP panel with a small screen and a single encoder. Turn the encoder to pick a track, click
-and hold to go into its settings, turn to scroll them, click to edit a value, and click and hold again to come
-back out.
+and hold to go into its settings, turn to scroll them, click to edit a value, double-click to finish, and click and
+hold again to come back out. Every setting is also in the right-click menu.
 
 **[Manual for VCV Rack](https://ormermodular.github.io/fluke/vcv/)** · [`docs/vcv/MANUAL.md`](docs/vcv/MANUAL.md)
 

@@ -112,7 +112,8 @@
     slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and
     Quantise, with the key set per track or for the whole module. Everything is on a 12&nbsp;HP panel with
     a small screen and a single encoder. Turn the encoder to pick a track, click and hold to go into its
-    settings, turn to scroll them, click to edit a value, and click and hold again to come back out.</p>
+    settings, turn to scroll them, click to edit a value, double-click to finish, and click and hold again
+    to come back out. Prefer a mouse to a knob? Every setting is also in the right-click menu.</p>
     <nav class="toc">
       <a href="#panel">The panel</a><a href="#catch">Catching a loop</a>
       <a href="#screen">The screen and encoder</a><a href="#tracks">Track settings</a>
@@ -203,10 +204,14 @@
       <li><b>Select.</b> Turn the encoder to pick a track. The ninth stop after track 8 is <b>GLOBAL</b>,
       the settings that belong to the whole module. The screen shows the track, whether it is caught or free,
       its style, rate and length, and its last 32 steps.</li>
-      <li><b>Click and hold to go in.</b> Now turn to scroll through the settings (the screen shows the group,
-      the setting's name and where you are in the list). <b>Click</b> to edit: the value turns amber and
-      underlined. Turn to change it, click to confirm.</li>
-      <li><b>Click and hold again to come back out</b> to Select, from anywhere.</li>
+      <li><b>Click and hold to go in.</b> A thin amber line grows along the top of the screen while you hold
+      (about half a second), and the settings open when it reaches the end. Now turn to scroll through the
+      settings (the screen shows the group, the setting's name and where you are in the list).
+      <b>Click</b> to edit: the value turns amber and underlined. Turn to change it, then
+      <b>double-click</b> to finish. A single click while editing does nothing, so a click that lands late
+      can never throw you out of the edit.</li>
+      <li><b>Click and hold again to come back out</b> to Select. Holding does nothing while you are
+      editing a value: double-click first.</li>
     </ol>
 
     <p>Touching a track's CATCH button or MUTATE knob also picks that track on the screen. The encoder
@@ -300,13 +305,25 @@
 
   <section id="menu">
     <h2>Right-click menu</h2>
+    <p>Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the
+    track the screen is on. Choose a track from <b>Track</b> at the top (or touch its CATCH or MUTATE, or
+    turn the encoder), then open the menu: that track's settings are listed first, then the module's.
+    Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).</p>
     <div class="tablewrap"><table class="wide">
       <tr><th>Item</th><th>Choices</th><th>What it does</th></tr>
+      <tr><td>Track</td><td>Track 1 to Track 8</td><td>Which track the settings below belong to. The screen follows.</td></tr>
+      <tr><td>Caught</td><td>on · off</td><td>The track's CATCH button.</td></tr>
+      <tr><td>Mutate</td><td>0 to 100%</td><td>The track's MUTATE knob.</td></tr>
+      <tr><td>Style · Chance · Rate · Length · Direction · Breathe</td><td>as in Track settings</td><td>The track's settings, with the same ranges.</td></tr>
+      <tr><td>Range · Slide · Quantise · Scale · Root</td><td>as in Track settings</td><td>The track's output settings. Scale and Root can be Global.</td></tr>
+      <tr><td>BPM · Run · Freeze</td><td>as in Global settings</td><td>With a clock patched in, BPM is set by it and the menu says so.</td></tr>
+      <tr><td>Key: Scale · Key: Root</td><td>13 scales · C to B</td><td>The module's key, for every track whose Scale or Root is Global.</td></tr>
+      <tr><td>Gate length</td><td>5 to 100%</td><td>How long every gate stays high, as a share of the step.</td></tr>
       <tr><td>Panel</td><td>Follow Rack setting · Silver · Black</td><td>Forces the silver or the black panel for this module. The jacks and screws change with it. The choice is saved with the patch. By default the panel follows Rack's <b>View &gt; Use dark panels if available</b>.</td></tr>
       <tr><td>Screensaver</td><td>Off · After 1 minute · After 5 minutes</td><td>How long the screen waits, untouched, before showing the whale's tail. Default after 1 minute. Saved with the patch.</td></tr>
     </table></div>
-    <p style="margin-top:14px">Everything else is on the screen. The patch saves every setting, and each caught
-    track's loop, so a patch reopens exactly as you left it.</p>
+    <p style="margin-top:14px">The patch saves every setting, and each caught track's loop, so a patch reopens
+    exactly as you left it.</p>
   </section>
 
   <section id="install">
@@ -426,7 +443,7 @@
  "enc": [
   "Encoder",
   "ENCODER",
-  "Turn to pick a track (the ninth stop is GLOBAL). Click and hold to go into its settings, and again to come out. Inside, turn to scroll, click to edit, turn to change, click to confirm. Turn quickly for bigger steps on the wide settings."
+  "Turn to pick a track (the ninth stop is GLOBAL). Click and hold to go into its settings, and again to come out. Inside, turn to scroll, click to edit, turn to change, double-click to finish. Turn quickly for bigger steps on the wide settings. Every setting is also in the right-click menu."
  ],
  "screen": [
   "Display",

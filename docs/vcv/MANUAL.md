@@ -4,7 +4,7 @@
 
 USER MANUAL · VCV RACK · v2.0.0 · 12 HP
 
-Fluke is a sibling to Shoal, Ormer Modular's generative melody sequencer, and a lot smaller. It is a CV generator with **eight tracks of ever-changing random voltage**. When something sounds right you **catch** it, and the last stretch that played becomes a loop. A **MUTATE** knob then decides how much that loop drifts each time round, from perfectly still to slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and Quantise, with the key set per track or for the whole module. Everything is on a 12 HP panel with a small screen and a single encoder. Turn the encoder to pick a track, click and hold to go into its settings, turn to scroll them, click to edit a value, and click and hold again to come back out.
+Fluke is a sibling to Shoal, Ormer Modular's generative melody sequencer, and a lot smaller. It is a CV generator with **eight tracks of ever-changing random voltage**. When something sounds right you **catch** it, and the last stretch that played becomes a loop. A **MUTATE** knob then decides how much that loop drifts each time round, from perfectly still to slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and Quantise, with the key set per track or for the whole module. Everything is on a 12 HP panel with a small screen and a single encoder. Turn the encoder to pick a track, click and hold to go into its settings, turn to scroll them, click to edit a value, double-click to finish, and click and hold again to come back out. Prefer a mouse to a knob? Every setting is also in the right-click menu.
 
 ## The panel
 
@@ -18,7 +18,7 @@ Everything below is at its default setting. Fluke comes in two panels, silver an
 - **RESET** (Trigger input): A rising edge (above about 1 V) restarts every track from the beginning of its pass on the next clock pulse.
 - **CATCH ALL** (Light button): Catches every track that is still free. If every track is already caught, releases them all.
 - **CATCH ALL** (Trigger input): A rising edge (above about 2 V) does exactly what the CATCH ALL button does.
-- **ENCODER** (Encoder): Turn to pick a track (the ninth stop is GLOBAL). Click and hold to go into its settings, and again to come out. Inside, turn to scroll, click to edit, turn to change, click to confirm. Turn quickly for bigger steps on the wide settings.
+- **ENCODER** (Encoder): Turn to pick a track (the ninth stop is GLOBAL). Click and hold to go into its settings, and again to come out. Inside, turn to scroll, click to edit, turn to change, double-click to finish. Turn quickly for bigger steps on the wide settings. Every setting is also in the right-click menu.
 - **THE SCREEN** (Display): Shows the selected track, whether it is caught or free, the setting being edited and its value, and the track's last 32 steps (or its caught loop, in amber, with a white bar on the step playing). After a minute untouched it becomes a night sea where each firing track makes a ripple. The right-click menu sets or turns off the screensaver.
 
 ## Catching a loop
@@ -58,8 +58,8 @@ At the end of each pass, a track rests for the whole next pass with a probabilit
 Nearly every setting lives on the screen, which you work with the encoder (the large knob). There are two levels, and one gesture moves between them: **click and hold** the encoder (about half a second, without turning it).
 
 1. **Select.** Turn the encoder to pick a track. The ninth stop after track 8 is **GLOBAL**, the settings that belong to the whole module. The screen shows the track, whether it is caught or free, its style, rate and length, and its last 32 steps.
-2. **Click and hold to go in.** Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, click to confirm.
-3. **Click and hold again to come back out** to Select, from anywhere.
+2. **Click and hold to go in.** A thin amber line grows along the top of the screen while you hold (about half a second), and the settings open when it reaches the end. Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, then **double-click** to finish. A single click while editing does nothing, so a click that lands late can never throw you out of the edit.
+3. **Click and hold again to come back out** to Select. Holding does nothing while you are editing a value: double-click first.
 
 Touching a track's CATCH button or MUTATE knob also picks that track on the screen. The encoder remembers where you were in each list. Settings that run from 0 to 100% (Chance, Slide, Breathe, Gate length), BPM and Length move one step at a time, and in bigger steps (5, or 4 for Length, 5 for BPM) when you turn quickly.
 
@@ -195,12 +195,22 @@ Pick **GLOBAL** (the stop after track 8), click and hold, and these are the sett
 
 ## Right-click menu
 
+Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the track the screen is on. Choose a track from **Track** at the top (or touch its CATCH or MUTATE, or turn the encoder), then open the menu: that track's settings are listed first, then the module's. Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).
+
 | Item | Choices | What it does |
 |---|---|---|
+| Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. |
+| Caught | on · off | The track's CATCH button. |
+| Mutate | 0 to 100% | The track's MUTATE knob. |
+| Style · Chance · Rate · Length · Direction · Breathe | as in Track settings | The track's settings, with the same ranges. |
+| Range · Slide · Quantise · Scale · Root | as in Track settings | The track's output settings. Scale and Root can be Global. |
+| BPM · Run · Freeze | as in Global settings | With a clock patched in, BPM is set by it and the menu says so. |
+| Key: Scale · Key: Root | 13 scales · C to B | The module's key, for every track whose Scale or Root is Global. |
+| Gate length | 5 to 100% | How long every gate stays high, as a share of the step. |
 | Panel | Follow Rack setting · Silver · Black | Forces the silver or the black panel for this module. The jacks and screws change with it. The choice is saved with the patch. By default the panel follows Rack's **View > Use dark panels if available**. |
 | Screensaver | Off · After 1 minute · After 5 minutes | How long the screen waits, untouched, before showing the whale's tail. Default after 1 minute. Saved with the patch. |
 
-Everything else is on the screen. The patch saves every setting, and each caught track's loop, so a patch reopens exactly as you left it.
+The patch saves every setting, and each caught track's loop, so a patch reopens exactly as you left it.
 
 ## Installing
 
