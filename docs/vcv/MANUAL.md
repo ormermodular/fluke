@@ -80,6 +80,7 @@ Pick a track, click and hold, and these are the settings, in the order you meet 
 | RANDOM | Style (Open) | The kind of randomness the track throws, free and in mutations. Seven styles, below. |
 | RANDOM | Chance (100%) | 0 to 100%. The chance a step fires. A step that misses sends no gate and the CV holds. It stays live on a caught loop. |
 | PLAY | Rate (x1) | 29 steps from /64 to x64. How fast the track steps against the clock. x1 is one step per clock pulse; /4 is one step every four pulses; x2 is two steps per pulse. Table below. |
+| PLAY | Swing (0%) | 0 to 50%. Holds back every second step of the track by this share of a step, for swung hats and late ghost kicks. 0% is straight, about 33% is a triplet feel and 50% is dotted. It follows the track's own Rate, and RESET puts the next step back on the beat. Other tracks are untouched, so a kick can stay straight while a hat swings. |
 | PLAY | Length (16) | 1 to 64 steps. How many steps CATCH grabs, and so how long the loop is. |
 | PLAY | Direction (Forwards) | The order a caught loop plays its steps in. Fifteen directions, below. |
 | PLAY | Breathe (0%) | 0 to 100%. The chance, at the end of each pass, that the next whole pass rests. |
@@ -200,9 +201,10 @@ Every setting is in the right-click menu too, so you can use the encoder or not.
 | Item | Choices | What it does |
 |---|---|---|
 | Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. |
+| Copy track · Paste onto | Track 1 to 8 · All other tracks | Copy the selected track's settings, MUTATE and (if it is caught) its loop, then paste them onto any other track, or onto all of the others. A pasted free track becomes free; a pasted caught track becomes caught with the same loop. |
 | Caught | on · off | The track's CATCH button. |
 | Mutate | 0 to 100% | The track's MUTATE knob. |
-| Style · Chance · Rate · Length · Direction · Breathe | as in Track settings | The track's settings, with the same ranges. |
+| Style · Chance · Rate · Swing · Length · Direction · Breathe | as in Track settings | The track's settings, with the same ranges. |
 | Range · Slide · Quantise · Scale · Root | as in Track settings | The track's output settings. Scale and Root can be Global. |
 | BPM · Run · Freeze | as in Global settings | With a clock patched in, BPM is set by it and the menu says so. |
 | Key: Scale · Key: Root | 13 scales · C to B | The module's key, for every track whose Scale or Root is Global. |
@@ -264,7 +266,7 @@ Use the module's right-click **Panel** menu. If it is set to Follow Rack setting
 
 | Format | Rack 2 · 12 HP | Not polyphonic. Silver and black panels. |
 |---|---|---|
-| Tracks | 8 | Each with its own style, Chance, Rate, Length, Direction, Breathe, Range, Slide, Quantise, Scale and Root; a CATCH button and a MUTATE knob |
+| Tracks | 8 | Each with its own style, Chance, Rate, Swing, Length, Direction, Breathe, Range, Slide, Quantise, Scale and Root; a CATCH button and a MUTATE knob |
 | Loops | 1 to 64 steps | Values and hit pattern stored per step; each track remembers its last 64 steps |
 | Styles | 7 | Open · Midwater · Shallows · Squall · Tide · Current · Deep |
 | Rates | 29 | /64 to x64 |
