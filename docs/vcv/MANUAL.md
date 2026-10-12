@@ -59,7 +59,7 @@ Nearly every setting lives on the screen, which you work with the encoder (the l
 
 1. **Select.** Turn the encoder to pick a track. The ninth stop after track 8 is **GLOBAL**, the settings that belong to the whole module. The screen shows the track, whether it is caught or free, its style, rate and length, and its last 32 steps.
 2. **Click and hold to go in.** A thin amber line grows along the top of the screen while you hold (about half a second), and the settings open when it reaches the end. Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, then **double-click** to finish. A single click while editing does nothing, so a click that lands late can never throw you out of the edit.
-3. **Click and hold again to come back out** to Select. Holding does nothing while you are editing a value: double-click first.
+3. **Click and hold to come back out.** Holding always steps back one level: if you are editing a value, it finishes the edit; hold again and you are back at Select.
 
 Touching a track's CATCH button or MUTATE knob also picks that track on the screen. The encoder remembers where you were in each list. Settings that run from 0 to 100% (Chance, Slide, Breathe, Gate length), BPM and Length move one step at a time, and in bigger steps (5, or 4 for Length, 5 for BPM) when you turn quickly.
 
