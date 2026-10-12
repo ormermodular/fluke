@@ -61,7 +61,7 @@ Nearly every setting lives on the screen, which you work with the encoder (the l
 2. **Click and hold to go in.** A thin amber line grows along the top of the screen while you hold (about two-thirds of a second), and the settings open when it reaches the end. Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, then **double-click** to finish. A single click while editing does nothing, so a click that lands late can never throw you out of the edit.
 3. **Click and hold to come back out.** Holding always steps back one level: if you are editing a value, it finishes the edit; hold again and you are back at Select.
 
-Touching a track's CATCH button or MUTATE knob also picks that track on the screen. The encoder remembers where you were in each list. Settings that run from 0 to 100% (Chance, Slide, Breathe, Gate length), BPM and Length move one step at a time, and in bigger steps (5, or 4 for Length, 5 for BPM) when you turn quickly.
+Clicking a track's number at the left of its row, or touching its CATCH button or MUTATE knob, also picks that track on the screen. The picked track's number lights up. The encoder remembers where you were in each list. Settings that run from 0 to 100% (Chance, Slide, Breathe, Gate length), BPM and Length move one step at a time, and in bigger steps (5, or 4 for Length, 5 for BPM) when you turn quickly.
 
 ### What the screen shows
 
@@ -196,11 +196,11 @@ Pick **GLOBAL** (the stop after track 8), click and hold, and these are the sett
 
 ## Right-click menu
 
-Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the track the screen is on. The quickest way to pick a track is to **click its number** at the left of its row: that picks the track and opens the menu in one go. (You can also choose a track from **Track** at the top of the menu, touch its CATCH or MUTATE, or turn the encoder.) Then: that track's settings are listed first, then the module's. Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).
+Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the track the screen is on. Pick a track by **clicking its number** at the left of its row (it lights up, and the others sink back), by touching its CATCH or MUTATE, by turning the encoder, or from **Track** at the top of the menu. Then: that track's settings are listed first, then the module's. Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).
 
 | Item | Choices | What it does |
 |---|---|---|
-| Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. Clicking a track's number on the panel does the same and opens the menu. |
+| Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. Clicking a track's number on the panel does the same. |
 | Copy track to | Track 1 to 8 · All other tracks | Copies the selected track straight onto the track you choose, or onto all the others: its settings, MUTATE and, if it is caught, its loop. A pasted free track becomes free; a pasted caught track becomes caught with the same loop. |
 | Caught | on · off | The track's CATCH button. |
 | Mutate | 0 to 100% | The track's MUTATE knob. |
