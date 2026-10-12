@@ -55,10 +55,10 @@ At the end of each pass, a track rests for the whole next pass with a probabilit
 
 ## The screen and encoder
 
-Nearly every setting lives on the screen, which you work with the encoder (the large knob). There are two levels, and one gesture moves between them: **click and hold** the encoder (about half a second, without turning it).
+Nearly every setting lives on the screen, which you work with the encoder (the large knob). There are two levels, and one gesture moves between them: **click and hold** the encoder (about two-thirds of a second, without turning it).
 
 1. **Select.** Turn the encoder to pick a track. The ninth stop after track 8 is **GLOBAL**, the settings that belong to the whole module. The screen shows the track, whether it is caught or free, its style, rate and length, and its last 32 steps.
-2. **Click and hold to go in.** A thin amber line grows along the top of the screen while you hold (about half a second), and the settings open when it reaches the end. Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, then **double-click** to finish. A single click while editing does nothing, so a click that lands late can never throw you out of the edit.
+2. **Click and hold to go in.** A thin amber line grows along the top of the screen while you hold (about two-thirds of a second), and the settings open when it reaches the end. Now turn to scroll through the settings (the screen shows the group, the setting's name and where you are in the list). **Click** to edit: the value turns amber and underlined. Turn to change it, then **double-click** to finish. A single click while editing does nothing, so a click that lands late can never throw you out of the edit.
 3. **Click and hold to come back out.** Holding always steps back one level: if you are editing a value, it finishes the edit; hold again and you are back at Select.
 
 Touching a track's CATCH button or MUTATE knob also picks that track on the screen. The encoder remembers where you were in each list. Settings that run from 0 to 100% (Chance, Slide, Breathe, Gate length), BPM and Length move one step at a time, and in bigger steps (5, or 4 for Length, 5 for BPM) when you turn quickly.
@@ -196,12 +196,12 @@ Pick **GLOBAL** (the stop after track 8), click and hold, and these are the sett
 
 ## Right-click menu
 
-Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the track the screen is on. Choose a track from **Track** at the top (or touch its CATCH or MUTATE, or turn the encoder), then open the menu: that track's settings are listed first, then the module's. Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).
+Every setting is in the right-click menu too, so you can use the encoder or not. The menu works on the track the screen is on. The quickest way to pick a track is to **click its number** at the left of its row: that picks the track and opens the menu in one go. (You can also choose a track from **Track** at the top of the menu, touch its CATCH or MUTATE, or turn the encoder.) Then: that track's settings are listed first, then the module's. Percentages and numbers are sliders (drag, or click or right-click a slider and type a value, then Enter).
 
 | Item | Choices | What it does |
 |---|---|---|
-| Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. |
-| Copy track · Paste onto | Track 1 to 8 · All other tracks | Copy the selected track's settings, MUTATE and (if it is caught) its loop, then paste them onto any other track, or onto all of the others. A pasted free track becomes free; a pasted caught track becomes caught with the same loop. |
+| Track | Track 1 to Track 8 | Which track the settings below belong to. The screen follows. Clicking a track's number on the panel does the same and opens the menu. |
+| Copy track to | Track 1 to 8 · All other tracks | Copies the selected track straight onto the track you choose, or onto all the others: its settings, MUTATE and, if it is caught, its loop. A pasted free track becomes free; a pasted caught track becomes caught with the same loop. |
 | Caught | on · off | The track's CATCH button. |
 | Mutate | 0 to 100% | The track's MUTATE knob. |
 | Style · Chance · Rate · Swing · Length · Direction · Breathe | as in Track settings | The track's settings, with the same ranges. |
