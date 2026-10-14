@@ -2,7 +2,7 @@
 
 # FLUKE
 
-USER MANUAL · VCV RACK · v2.0.0 · 12 HP
+USER MANUAL · VCV RACK · v2.1.0 · 12 HP
 
 Fluke is a sibling to Shoal, Ormer Modular's generative melody sequencer, and a lot smaller. It is a CV generator with **eight tracks of ever-changing random voltage**. When something sounds right you **catch** it, and the last stretch that played becomes a loop. A **MUTATE** knob then decides how much that loop drifts each time round, from perfectly still to slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and Quantise, with the key set per track or for the whole module. Everything is on a 12 HP panel with a small screen and a single encoder. Turn the encoder to pick a track, click and hold to go into its settings, turn to scroll them, click to edit a value, double-click to finish, and click and hold again to come back out. Prefer a mouse to a knob? Every setting is also in the right-click menu.
 
@@ -210,6 +210,7 @@ Every setting is in the right-click menu too, so you can use the encoder or not.
 | Key: Scale · Key: Root | 13 scales · C to B | The module's key, for every track whose Scale or Root is Global. |
 | Gate length | 5 to 100% | How long every gate stays high, as a share of the step. |
 | Panel | Follow Rack setting · Silver · Black | Forces the silver or the black panel for this module. The jacks and screws change with it. The choice is saved with the patch. By default the panel follows Rack's **View > Use dark panels if available**. |
+| Poly output routing | Separate · Pairs · Split 4+4 · All 8 | Merges the track outputs into polyphonic cables. Separate is the default: eight CV and eight gate jacks. Pairs puts tracks 1+2 on the CV and gate jacks of track 2, 3+4 on track 4, 5+6 on track 6 and 7+8 on track 8. Split 4+4 puts tracks 1-4 on track 4 and 5-8 on track 8. All 8 puts all eight on track 8. The merging jack carries the poly cable; the single-track jacks keep working as normal. Saved with the patch. |
 | Screensaver | Off · After 1 minute · After 5 minutes | How long the screen waits, untouched, before showing the whale's tail. Default after 1 minute. Saved with the patch. |
 
 The patch saves every setting, and each caught track's loop, so a patch reopens exactly as you left it.
