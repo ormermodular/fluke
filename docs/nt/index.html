@@ -1,0 +1,374 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fluke disting NT Manual</title>
+<style>
+  /* Single look, the Ormer Modular manual house style: night-sea blue-grey with the lamp amber.
+     Layout: one centred column; the interactive panel is the hero. */
+  :root{
+    --bg:#0b1119; --panel:#1c242e; --panel-edge:#39424e; --card:#141b24; --rule:#2c3641;
+    --ink:#c9d9e6; --strong:#e8eef5; --muted:#84939f; --accent:#e2a24a;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--mono);margin:0;padding-block:40px 90px;padding-inline:20px}
+  .wrap{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+  .eyebrow{color:var(--accent);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  h1{font-size:30px;font-weight:700;color:#eef2f6;margin:10px 0 4px;letter-spacing:.14em;text-wrap:balance}
+  .vstamp{color:var(--muted);font-size:11px;letter-spacing:.14em;margin:0 0 10px}
+  .lede{color:var(--muted);font-size:13.5px;line-height:1.7;max-width:64ch;margin:0}
+  .lede b{color:var(--ink)}
+  h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;font-weight:600;text-wrap:balance}
+  h3{font-size:13px;color:var(--strong);margin:22px 0 8px;font-weight:700;letter-spacing:.02em}
+  section>h3:first-of-type{margin-top:0}
+  p{font-size:12.5px;line-height:1.75;color:var(--muted);margin:0 0 10px;max-width:70ch}
+  p b,li b,dd b{color:var(--ink)}
+  p code,li code,td code,dd code{color:var(--accent);background:rgba(226,162,74,.08);padding:0 4px;border-radius:3px;font-size:.95em}
+  ul,ol{margin:0 0 10px;padding-left:20px;display:flex;flex-direction:column;gap:7px}
+  li{font-size:12.5px;line-height:1.7;color:var(--muted);min-width:0}
+  li::marker{color:var(--accent)}
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .toc a{color:var(--ink);text-decoration:none;font-size:10.5px;letter-spacing:.08em;
+    border:1px solid var(--panel-edge);border-radius:999px;padding:5px 12px;background:var(--card)}
+  .toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+
+  /* interactive panel */
+  .stage{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start}
+  @media (max-width:700px){.stage{grid-template-columns:minmax(0,1fr)}}
+  .figcol{display:flex;flex-direction:column;gap:12px;max-width:300px;width:100%;margin-inline:auto}
+  .seg{display:flex;gap:0;border:1px solid var(--panel-edge);border-radius:999px;overflow:hidden;align-self:flex-start}
+  .seg button{font:inherit;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;
+    background:var(--card);color:var(--muted);border:0;cursor:pointer}
+  .seg button+button{border-left:1px solid var(--panel-edge)}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#1a1206;font-weight:700}
+  .fig{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);
+    aspect-ratio:720/1518;background:#171717}
+  .fig img{display:block;width:100%;height:100%}
+  [hidden]{display:none!important}
+  .hs{position:absolute;transform:translate(-50%,-50%);aspect-ratio:1;border-radius:50%;padding:0;
+    border:2px solid transparent;background:transparent;cursor:pointer}
+  .hs:hover{border-color:rgba(226,162,74,.55)}
+  .hs[aria-pressed="true"]{border-color:var(--accent);background:rgba(226,162,74,.16)}
+  .hs.rect{border-radius:4px;aspect-ratio:auto;transform:none}
+  .info{border:1px solid var(--panel-edge);border-radius:10px;background:var(--card);padding:18px 20px;min-height:12em}
+  .info .kind{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  .info h3{margin:0 0 10px;font-size:16px;letter-spacing:.1em}
+  .info p{font-size:12.5px}
+  .hint{font-size:11px;color:var(--muted);margin-top:10px}
+
+  table{border-collapse:collapse;width:100%;font-size:12px}
+  th{color:var(--muted);font-weight:600;text-align:left;font-size:10px;text-transform:uppercase;
+    letter-spacing:.14em;padding:8px 12px;border-bottom:1px solid var(--rule)}
+  td{padding:8px 12px;border-bottom:1px solid var(--panel);vertical-align:top;line-height:1.6;color:var(--muted)}
+  td:first-child{color:var(--strong);font-weight:700;white-space:nowrap}
+  td:nth-child(2){color:var(--accent);white-space:nowrap}
+  .tablewrap{overflow-x:auto}
+  .wide td:nth-child(2){white-space:normal}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+  .card{border:1px solid var(--panel-edge);border-radius:10px;background:var(--card);padding:16px 18px}
+  .card h4{margin:0 0 8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .card p{margin:0;font-size:12px}
+  .card .set{display:block;margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule);
+    font-size:11px;color:#a9b4c0;line-height:1.8}
+  .card .set b{color:var(--accent);font-weight:600}
+
+  .note{border:1px solid var(--panel-edge);border-left:3px solid var(--accent);border-radius:8px;
+    background:var(--card);padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.7;max-width:none}
+  .note b{color:var(--ink)}
+
+  .flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0 14px}
+  .flow span{border:1px solid var(--panel-edge);background:var(--card);border-radius:6px;
+    padding:5px 10px;font-size:10.5px;letter-spacing:.08em;color:var(--ink)}
+  .flow em{color:var(--accent);font-style:normal;font-size:11px}
+
+  .qa dt{font-size:12.5px;color:var(--strong);font-weight:700;margin-top:14px}
+  .qa dt:first-child{margin-top:0}
+  .qa dd{margin:4px 0 0;font-size:12.5px;line-height:1.7;color:var(--muted)}
+
+  footer{border-top:1px solid var(--panel);padding-top:22px;text-align:center}
+  footer p{max-width:none;margin:0 0 6px}
+  .fin{color:var(--accent);letter-spacing:.3em;font-size:10px;text-transform:uppercase}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:18px}
+  .steps table td:first-child{white-space:nowrap}
+  .steps td:nth-child(3),.steps td:nth-child(4){color:var(--muted);white-space:nowrap}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Ormer Modular · made in Guernsey</div>
+    <h1>FLUKE</h1>
+    <p class="vstamp">USER MANUAL · EXPERT SLEEPERS DISTING NT · v1.0.0 · FREE</p>
+    <p class="lede">Fluke is a sibling to Shoal, Ormer Modular's generative melody sequencer, and a lot
+    smaller. It is a CV generator with <b>eight tracks of ever-changing random voltage</b>. When
+    something sounds right you <b>catch</b> it, and the last stretch that played becomes a loop. A
+    <b>Mutate</b> setting then decides how much that loop drifts each time round, from perfectly still to
+    slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and
+    Quantise, with the key set per track or for the whole algorithm. On the disting NT it takes three pots
+    and two pushes: <b>three pots</b> for the track's settings, <b>the left pot push to catch</b> and
+    <b>the right pot push to catch all</b>. Everything else is an ordinary parameter, so it can be mapped
+    to CV, MIDI or I²C like any other. Fluke also sends MIDI notes, and can be clocked from MIDI.</p>
+    <nav class="toc">
+      <a href="#screen">The screen</a><a href="#controls">Controls</a>
+      <a href="#catch">Catching a loop</a><a href="#tracks">Track parameters</a>
+      <a href="#global">Global parameters</a><a href="#midi">MIDI</a>
+      <a href="#routing">Routing</a><a href="#presets">Presets</a>
+      <a href="#install">Installing</a><a href="#trouble">Troubleshooting</a>
+      <a href="#specs">Specifications</a>
+    </nav>
+  </header>
+
+  <section id="screen">
+    <h2>The screen</h2>
+    <img alt="The Fluke screen on the disting NT: a whale's tail rising from a night sea, the track name and BPM along the top, and three pot labels along the bottom" src="data:image/png;base64,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" style="width:100%;max-width:768px;image-rendering:pixelated;border:1px solid var(--panel-edge);border-radius:6px;display:block">
+    <p style="margin-top:12px">Fluke replaces the usual parameter line with its own screen: a whale's tail rising from a night
+    sea. Each track that fires opens a ripple on the water (a caught loop's ripple is brighter), and any
+    firing makes the tail dip and throw a few drops.</p>
+    <ul>
+      <li><b>Top left:</b> the picked track, and <code>CAUGHT</code> when it has a loop. Under it, for three seconds after you
+      turn a pot, the name and value of the setting you moved. It fades away when you stop turning.</li>
+      <li><b>Top, right of centre:</b> what the two pot pushes do right now. <code>PUSH L: CATCH</code> or
+      <code>RELEASE</code> for the picked track, <code>R: CATCH ALL</code> or <code>RELEASE ALL</code> for every track.</li>
+      <li><b>Top right:</b> the tempo (<code>120 BPM</code>), or <code>EXT</code> when a clock cable sets it, or <code>MIDI</code> when it follows MIDI clock.</li>
+      <li><b>Bottom:</b> the name of what each of the three pots does on this page, each with a small level bar, and four dots for the page you are on.</li>
+    </ul>
+  </section>
+
+  <section id="controls">
+    <h2>Controls</h2>
+    <p>Fluke uses as little of the disting NT's own controls as it can. Buttons 1 to 4 and the left encoder push
+    do their usual jobs, so you can always get out or into the parameter list.</p>
+    <div class="tablewrap"><table class="wide">
+      <tr><th>Control</th><th>On the Fluke screen</th></tr>
+      <tr><td>Three pots</td><td>Edit three settings of the picked track. Which three depends on the page.</td></tr>
+      <tr><td>Centre pot push</td><td>Next page of three settings (four pages, then back to the first).</td></tr>
+      <tr><td>Left pot push</td><td><b>Catch</b> the picked track, or release it. The same as the track's <code>Caught</code> parameter.</td></tr>
+      <tr><td>Right pot push</td><td><b>Catch all</b>: catches every track that is still free. If all are caught, releases them all. The same as the <code>Catch all</code> parameter.</td></tr>
+      <tr><td>Encoders (turn) and right encoder push</td><td>Do nothing here, so they cannot change a setting you cannot see. Press button 2 for the parameter list, where they work as normal.</td></tr>
+      <tr><td>Buttons 1 to 4, left encoder push</td><td>The disting NT's own: menu, parameters, help and shift.</td></tr>
+    </table></div>
+    <h3>The four pot pages</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Page</th><th>Left pot</th><th>Centre pot</th><th>Right pot</th></tr>
+      <tr><td>1</td><td>TRACK</td><td>MUTATE</td><td>CHANCE</td></tr>
+      <tr><td>2</td><td>SLIDE</td><td>RATE</td><td>LENGTH</td></tr>
+      <tr><td>3</td><td>SWING</td><td>STYLE</td><td>DIRECTION</td></tr>
+      <tr><td>4</td><td>BREATHE</td><td>RANGE</td><td>SCALE</td></tr>
+    </table></div>
+    <p style="margin-top:14px"><b>TRACK</b> picks which of the eight tracks the other pots and the screen are on. It is
+    the <code>Track</code> parameter, so you can also set it from the parameter list or map it to CV.</p>
+    <p class="note"><b>Pots pick up where the setting is.</b> When you change page, or pick another track, the pots
+    do nothing until your hand reaches the setting's current value, and then they take over. That is the disting NT's own
+    pick-up behaviour, so nothing jumps.</p>
+    <p>Everything not on a pot page (Quantise, Root, the Global key, Clock source, Run, Freeze, Gate length, MIDI and the
+    routing) is in the parameter list: press button 2.</p>
+  </section>
+
+  <section id="catch">
+    <h2>Catching a loop</h2>
+    <p>Every track is a source of random voltage. On each clock pulse (scaled by the track's Rate) it picks a
+    new value in the style you chose, sends it to its CV output, and sends a gate to its gate output if the step
+    passes Chance. The track remembers what it played: the last 64 steps, together with which of them fired.</p>
+    <div class="flow">
+      <span>CLOCK</span><em>→</em><span>RATE</span><em>→</em><span>STYLE (random value)</span><em>→</em>
+      <span>CHANCE</span><em>→</em><span>RANGE · QUANTISE · SLIDE</span><em>→</em><span>CV · GATE</span>
+    </div>
+    <h3>Catch turns what just played into a loop</h3>
+    <p>Push the <b>left pot</b> and the last <b>Length</b> steps that played become the picked track's loop
+    (the default Length is 16 steps; at most 64). The screen says <code>CAUGHT</code>. From then on the track plays the
+    loop instead of choosing new values. The first time round it plays exactly what you caught. Push again to
+    <b>release</b> it, and the track goes back to throwing fresh values.</p>
+    <p>If a track hasn't played anything yet there is nothing to catch, and the push does nothing.</p>
+    <h3>Mutate: how much the loop changes each time round</h3>
+    <p>At the end of every pass of a caught loop, each step is replaced by a fresh value in the track's
+    style with a probability set by the track's <b>Mutate</b>, and a fresh Chance roll comes with it.
+    At <b>0%</b> the loop repeats exactly, however long it runs. At <b>100%</b> every step is replaced
+    every pass, so it behaves like a free track. In between, the loop slowly wanders. Mutate works on
+    caught loops only.</p>
+    <h3>What stays live on a caught loop</h3>
+    <p>A loop stores the values and which steps fired, not the voltages. So <b>Range, Quantise, Scale,
+    Root, Slide, Chance, Rate and Direction</b> all keep working on a caught loop, and the loop at fixed
+    settings repeats exactly. Re-quantise a caught loop into another key, or shrink its Range, and the same
+    pattern comes out transformed.</p>
+    <h3>Catch all</h3>
+    <p>The <b>right pot push</b>, the <code>Catch all</code> parameter, or a trigger into the <code>Catch all input</code>
+    catches every track that is still free. If every track is already caught, it releases them all.</p>
+    <h3>Chance, and why a missed step holds</h3>
+    <p>A step that misses its Chance is <b>skipped</b>: it sends no gate and the CV <b>holds</b> its
+    previous value. This is deliberate, so a note's release tail never changes pitch under it. The missed
+    step is still recorded with its roll, so a caught loop keeps its rhythm of hits and misses.</p>
+    <h3>Breathe: whole passes of silence</h3>
+    <p>At the end of each pass, a track rests for the whole next pass with a probability set by
+    <b>Breathe</b>: no gates, and the CV holds. It lets a loop drop out and come back.</p>
+  </section>
+
+  <section id="tracks">
+    <h2>Track parameters</h2>
+    <p>There is a parameter page for each track (<code>Track 1</code> to <code>Track 8</code>), and every
+    parameter on it is prefixed with the track, such as <code>T3: Rate</code>. Each track has its own set.
+    Defaults are shown in brackets.</p>
+    <div class="tablewrap"><table class="wide">
+      <tr><th>Parameter</th><th>What it does</th></tr>
+      <tr><td>Caught (Off)</td><td>On while the track plays a caught loop. Turn it On to catch, Off to release. Map it to a gate or a button to catch from a patch. A catch with nothing played yet turns itself back Off.</td></tr>
+      <tr><td>Mutate (0%)</td><td>0 to 100%. How much a caught loop changes each time round.</td></tr>
+      <tr><td>Style (Open)</td><td>The kind of randomness the track throws, free and in mutations. Seven styles, below.</td></tr>
+      <tr><td>Chance (100%)</td><td>0 to 100%. The chance a step fires. A step that misses sends no gate and the CV holds. It stays live on a caught loop.</td></tr>
+      <tr><td>Rate (x1)</td><td>29 steps from /64 to x64. How fast the track steps against the clock. x1 is one step per clock pulse; /4 is one step every four pulses; x2 is two steps per pulse. Table below.</td></tr>
+      <tr><td>Swing (0%)</td><td>0 to 50%. Holds back every second step of the track by this share of a step, for swung hats and late ghost kicks. 0% is straight, about 33% is a triplet feel and 50% is dotted. It follows the track's own Rate, and a reset puts the next step back on the beat. Other tracks are untouched.</td></tr>
+      <tr><td>Length (16)</td><td>1 to 64 steps. How many steps a catch grabs, and so how long the loop is.</td></tr>
+      <tr><td>Direction (Forwards)</td><td>The order a caught loop plays its steps in. Fifteen directions, below.</td></tr>
+      <tr><td>Breathe (0%)</td><td>0 to 100%. The chance, at the end of each pass, that the next whole pass rests.</td></tr>
+      <tr><td>Range (0 to 5V)</td><td>The size and polarity of the CV, in one setting: 0 to 1V · 0 to 2V · 0 to 3V · 0 to 5V (default) · 0 to 10V · ±1V · ±2V · ±3V · ±5V · ±10V. Unipolar ranges run from 0 V up; the ± ranges swing both ways about 0 V.</td></tr>
+      <tr><td>Slide (0%)</td><td>0 to 100%. How much of each step is spent gliding to the new value. At 0% the CV jumps; at 100% it glides all the way, step to step.</td></tr>
+      <tr><td>Quantise (Off)</td><td>Snaps the CV to the track's scale and root, before any Slide. Off, the CV is continuous.</td></tr>
+      <tr><td>Scale (Global)</td><td>Global, or one of 13 scales for this track alone. Global follows the algorithm's Scale on the Global page.</td></tr>
+      <tr><td>Root (Global)</td><td>Global, or C to B for this track alone. Global follows the algorithm's Root.</td></tr>
+      <tr><td>CV out, CV out mode</td><td>The bus the track's CV goes to (None by default), and whether it replaces what is on the bus (the default) or adds to it.</td></tr>
+      <tr><td>Gate out, Gate out mode</td><td>The same for the track's gate.</td></tr>
+      <tr><td>MIDI channel (0)</td><td>0 (off) or 1 to 16. The channel this track sends MIDI notes on. See MIDI.</td></tr>
+    </table></div>
+    <p style="margin-top:14px">The scales are: Chromatic · Major · Natural minor · Harmonic minor · Dorian · Phrygian · Lydian · Mixolydian · Major pent · Minor pent · Blues · Hirajoshi · In-Sen. A note halfway between two scale notes snaps down.</p>
+    <h3>Styles</h3>
+    <p>A style is the shape of the randomness: how the values are spread across the track's Range.</p>
+    <div class="tablewrap"><table class="wide"><tr><th>Style</th><th>What it throws</th></tr><tr><td>Open (default)</td><td>Every value in the range is equally likely. The plainest randomness.</td></tr><tr><td>Midwater</td><td>Values gather around the middle of the range, and the extremes are rare.</td></tr><tr><td>Shallows</td><td>Leans low: most values sit near the bottom, with now and then a middle one.</td></tr><tr><td>Squall</td><td>Mostly calm and low, with sudden gusts.</td></tr><tr><td>Tide</td><td>Rising and falling runs: three to six steps climb towards a new level, then turn and fall back.</td></tr><tr><td>Current</td><td>A smooth wander. Each value is a small move from the one before.</td></tr><tr><td>Deep</td><td>A slow, layered wander: long rolling movements with smaller ripples riding on them.</td></tr></table></div>
+    <h3>Directions</h3>
+    <p>Direction decides the order a <b>caught</b> loop plays its steps in. A free track picks a new random
+    value every step, so its order doesn't matter.</p>
+    <div class="tablewrap"><table class="wide"><tr><th>Direction</th><th>Order a caught loop plays in</th></tr><tr><td>Forwards (default)</td><td>Step 1 to the last step, in order.</td></tr><tr><td>Reverse</td><td>The last step back to step 1.</td></tr><tr><td>Pendulum</td><td>Forwards, then back, turning round at each end (the end steps play twice).</td></tr><tr><td>Random</td><td>Any step each time, so repeats and gaps are possible.</td></tr><tr><td>Drunk</td><td>A stagger: half the time one step forward, a quarter of the time the same step again, a quarter of the time one step back.</td></tr><tr><td>Pong</td><td>Forwards, then back, bouncing off each end without repeating the end steps.</td></tr><tr><td>Tide</td><td>Forwards, but the values shift one step along every pass, so the notes slide against the rhythm of hits.</td></tr><tr><td>Shuffle</td><td>Every step once per pass, in a shuffled order that changes each pass.</td></tr><tr><td>Pools</td><td>Circles a pool of three or four steps for a while, then moves to another place in the loop.</td></tr><tr><td>Stride</td><td>Two ahead, one back: 1, 3, 2, 4, 3, 5 and so on. A pass takes twice as many steps.</td></tr><tr><td>Gravity</td><td>Moves forwards, but each step has a chance of snapping back to step 1.</td></tr><tr><td>Converge</td><td>Folds in from both ends: first, last, second, second to last, and so on to the middle.</td></tr><tr><td>Diverge</td><td>Unfolds from the middle out to both ends.</td></tr><tr><td>Skitter</td><td>Random, but never the same step twice in a row.</td></tr><tr><td>Anchor</td><td>Step 1 between every other step: 1, 2, 1, 3, 1, 4 and so on. A pedal note with excursions.</td></tr></table></div>
+    <h3>Rate</h3>
+    <p>The clock is one pulse per beat (see Global parameters). Rate multiplies or divides that for each
+    track, so tracks can run against each other.</p>
+    <div class="steps"><div class="tablewrap"><table><tr><th>#</th><th>Rate</th></tr><tr><td>1</td><td>/64</td></tr><tr><td>2</td><td>/32</td></tr><tr><td>3</td><td>/16</td></tr><tr><td>4</td><td>/8</td></tr><tr><td>5</td><td>/7</td></tr><tr><td>6</td><td>/6</td></tr><tr><td>7</td><td>/5.3</td></tr><tr><td>8</td><td>/5</td></tr><tr><td>9</td><td>/4</td></tr><tr><td>10</td><td>/3</td></tr><tr><td>11</td><td>/2.6</td></tr><tr><td>12</td><td>/2</td></tr><tr><td>13</td><td>/1.5</td></tr><tr><td>14</td><td>x1 (default)</td></tr><tr><td>15</td><td>x1.25</td></tr></table></div><div class="tablewrap"><table><tr><th>#</th><th>Rate</th></tr><tr><td>16</td><td>x1.3</td></tr><tr><td>17</td><td>x1.5</td></tr><tr><td>18</td><td>x2</td></tr><tr><td>19</td><td>x2.6</td></tr><tr><td>20</td><td>x3</td></tr><tr><td>21</td><td>x4</td></tr><tr><td>22</td><td>x5</td></tr><tr><td>23</td><td>x5.3</td></tr><tr><td>24</td><td>x6</td></tr><tr><td>25</td><td>x7</td></tr><tr><td>26</td><td>x8</td></tr><tr><td>27</td><td>x16</td></tr><tr><td>28</td><td>x32</td></tr><tr><td>29</td><td>x64</td></tr></table></div></div>
+  </section>
+
+  <section id="global">
+    <h2>Global parameters</h2>
+    <p>These are on the <code>Global</code> page.</p>
+    <div class="tablewrap"><table class="wide">
+      <tr><th>Parameter</th><th>What it does</th></tr>
+      <tr><td>Track (1)</td><td>1 to 8. The track the pots and the screen are on.</td></tr>
+      <tr><td>Catch all (Off)</td><td>A momentary action: setting it to Go catches every free track (or releases all, if all are caught) and it returns to Off by itself. This is what the right pot push does. It can be mapped.</td></tr>
+      <tr><td>Clock source (Internal)</td><td>Internal, External or MIDI. Internal uses the BPM below. External steps on each rising edge of the clock input. MIDI follows incoming MIDI clock.</td></tr>
+      <tr><td>BPM (120)</td><td>20 to 300. The internal clock's tempo. Each pulse of an external clock counts as one beat, the same as the internal clock.</td></tr>
+      <tr><td>Run (On)</td><td>Starts and stops the clock. Off, no track steps.</td></tr>
+      <tr><td>Freeze (Off)</td><td>Nothing advances: every CV holds its value and sounding gates stay as they are.</td></tr>
+      <tr><td>Scale (Natural minor)</td><td>The scale Quantise snaps to on every track whose Scale is Global.</td></tr>
+      <tr><td>Root (C)</td><td>The key note of that scale, for every track whose Root is Global.</td></tr>
+      <tr><td>Gate length (50%)</td><td>5 to 100%. How long every gate stays high, as a share of the step.</td></tr>
+      <tr><td>Gate level (5 V)</td><td>1 to 10 V. The height of every gate.</td></tr>
+      <tr><td>Clock input (1)</td><td>The bus an external clock arrives on.</td></tr>
+      <tr><td>Reset input (None)</td><td>The bus a reset trigger arrives on. A rising edge restarts every track from the beginning of its pass on the next clock pulse.</td></tr>
+      <tr><td>Catch all input (None)</td><td>The bus a trigger arrives on to do what Catch all does.</td></tr>
+      <tr><td>MIDI dest, MIDI velocity, MIDI note at 0V</td><td>See MIDI.</td></tr>
+    </table></div>
+    <p class="note" style="margin-top:14px"><b>One key or eight.</b> Leave every track on Global and the whole
+    algorithm plays in one key: change Scale and Root once. Set a track's own Scale or Root and it goes its own
+    way, for a bass in minor pentatonic under a lead in the full minor scale, or a drone a fifth away.</p>
+  </section>
+
+  <section id="midi">
+    <h2>MIDI</h2>
+    <h3>Note out</h3>
+    <p>Each track can send its notes as MIDI. Set the track's <b>MIDI channel</b> to 1 to 16; at <b>0</b>, the
+    default, the track sends none. The notes of a track are sent as:</p>
+    <ul>
+      <li><b>Pitch:</b> <code>MIDI note at 0V</code> (default 36, C2) plus the track's CV in semitones, at one volt per
+      octave, rounded to the nearest note. Quantise a track and it sends notes of its scale.</li>
+      <li><b>Start and end:</b> a note starts on every step that fires, at the value the CV is moving to (so Slide does
+      not smear the pitch), and ends when the track's gate falls. MIDI timing is always the audible gate.</li>
+      <li><b>One note at a time per track.</b> Changing the track's channel or the destination while a note is sounding
+      ends it first.</li>
+      <li><b>Velocity and destination</b> are shared by all tracks: <code>MIDI velocity</code> (1 to 127, default 100) and
+      <code>MIDI dest</code>, which can be any mix of the breakout, the select bus, USB and the disting NT's own internal
+      MIDI (to play another algorithm, such as Poly FM, from Fluke). The default is the breakout.</li>
+    </ul>
+    <h3>Clock in</h3>
+    <p>Set <b>Clock source</b> to <b>MIDI</b> and Fluke follows incoming MIDI clock: 24 clocks make one beat, one x1
+    step. <b>Start</b> restarts every track from its first step, <b>Stop</b> holds the clock and <b>Continue</b> carries on from where it stopped.</p>
+  </section>
+
+  <section id="routing">
+    <h2>Routing</h2>
+    <p>Each track has a <b>CV out</b> and a <b>Gate out</b>. They start on <b>None</b>, so a track touches no bus until you give it one.</p>
+    <div class="tablewrap"><table class="wide">
+      <tr><th>Output</th><th>What it carries</th></tr>
+      <tr><td>CV out (1 to 8)</td><td>The track's random voltage, one new value per step: 0 V up to the track's Range, or ± the Range for the bipolar settings. Held between steps (and glided, if Slide is up).</td></tr>
+      <tr><td>Gate out (1 to 8)</td><td>A gate on every step that passes Chance, at the Gate level (default 5 V) for as long as Gate length says. A resting track sends none.</td></tr>
+    </table></div>
+    <p style="margin-top:14px">Each output has a mode: <b>Replace</b> (the default) writes the track's signal to the bus,
+    and <b>Add</b> sums it onto whatever is already there.</p>
+  </section>
+
+  <section id="presets">
+    <h2>Presets</h2>
+    <p>A preset saves every parameter, and each caught track's loop with its hit pattern, so a preset reloads exactly as you
+    left it. <b>Caught</b> is a parameter, so a preset, or a mapped CV, can catch and release a track.</p>
+  </section>
+
+  <section id="install">
+    <h2>Installing</h2>
+    <p>Fluke is free. It needs <b>disting NT firmware 1.19 or later</b>.</p>
+    <ol>
+      <li>Copy <code>fluke.o</code> to the <code>programs/plug-ins</code> folder on the disting NT's SD card.</li>
+      <li>Put the card back and start the disting NT (or rescan the plug-ins).</li>
+      <li>Add <b>Fluke</b> to a preset: it is in the algorithm list under its name.</li>
+    </ol>
+  </section>
+
+  <section id="trouble">
+    <h2>Troubleshooting</h2>
+    <dl class="qa">
+      <dt>Nothing is moving.</dt>
+      <dd>Fluke needs a clock to step. Check <b>Clock source</b>: Internal needs nothing; External needs a clock on the Clock
+      input bus; MIDI needs MIDI clock and a Start. Also check <b>Run</b> is On and <b>Freeze</b> is Off.</dd>
+      <dt>I hear or see nothing from a track.</dt>
+      <dd>A track's CV out and Gate out start on None. Give each a bus on its track page.</dd>
+      <dt>Pushing the left pot does nothing.</dt>
+      <dd>A track can only catch what it has played. Wait for it to step at least once. If the track's Rate is slow, that
+      can take a while.</dd>
+      <dt>The loop never changes.</dt>
+      <dd>Mutate at 0% repeats the loop exactly. Turn the track's Mutate up. Mutate does nothing to a free track.</dd>
+      <dt>A gate is missing, and the CV didn't change.</dt>
+      <dd>That step missed its Chance (or the track is resting through a Breathe pass). A missed step holds the CV on purpose.</dd>
+      <dt>The pots don't respond after I change page or track.</dt>
+      <dd>They pick up where the setting is: move the pot past the setting's current value and it takes over.</dd>
+      <dt>The encoders do nothing.</dt>
+      <dd>On the Fluke screen they are switched off, so they can't change a setting you can't see. Press button 2 for
+      the parameter list, where they work as usual.</dd>
+      <dt>The notes aren't in my key.</dt>
+      <dd>Quantise must be On for the track. Then check the track's Scale and Root: if they're on Global, the Global Scale and
+      Root decide.</dd>
+      <dt>No MIDI comes out.</dt>
+      <dd>Set the track's MIDI channel above 0, and check MIDI dest isn't None.</dd>
+    </dl>
+  </section>
+
+  <section id="specs">
+    <h2>Specifications</h2>
+    <div class="tablewrap"><table class="wide">
+      <tr><td>Format</td><td>disting NT algorithm</td><td>Firmware 1.19 or later. Free.</td></tr>
+      <tr><td>Tracks</td><td>8</td><td>Each with its own style, Chance, Rate, Swing, Length, Direction, Breathe, Range, Slide, Quantise, Scale, Root, Mutate, Caught and MIDI channel</td></tr>
+      <tr><td>Loops</td><td>1 to 64 steps</td><td>Values and hit pattern stored per step; each track remembers its last 64 steps; saved in presets</td></tr>
+      <tr><td>Styles</td><td>7</td><td>Open · Midwater · Shallows · Squall · Tide · Current · Deep</td></tr>
+      <tr><td>Rates</td><td>29</td><td>/64 to x64</td></tr>
+      <tr><td>Directions</td><td>15</td><td>Forwards to Anchor</td></tr>
+      <tr><td>Scales</td><td>13</td><td>Chromatic and twelve more, with any of 12 roots</td></tr>
+      <tr><td>CV outputs</td><td>8, on any buses</td><td>0 to 1, 2, 3, 5 or 10&nbsp;V, or ± 1, 2, 3, 5 or 10&nbsp;V</td></tr>
+      <tr><td>Gate outputs</td><td>8, on any buses</td><td>1 to 10&nbsp;V, 5 to 100% of the step</td></tr>
+      <tr><td>Clock</td><td>20 to 300 BPM</td><td>internal, one pulse per beat from a bus, or MIDI clock</td></tr>
+      <tr><td>MIDI</td><td>note out per track</td><td>16 channels; any of breakout, select bus, USB and internal</td></tr>
+    </table></div>
+    <p style="margin-top:14px">Fluke's engine is original. It uses no third-party DSP.</p>
+  </section>
+
+  <footer>
+    <p>Fluke for the disting NT · Ormer Modular · made in Guernsey</p>
+    <p class="fin">catch it</p>
+  </footer>
+</div>
