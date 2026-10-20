@@ -86,6 +86,7 @@ There is a parameter page for each track (`Track 1` to `Track 8`), and every par
 | Style (Open) | The kind of randomness the track throws, free and in mutations. Seven styles, below. |
 | Chance (100%) | 0 to 100%. The chance a step fires. A step that misses sends no gate and the CV holds. It stays live on a caught loop. |
 | Rate (x1) | 29 steps from /64 to x64. How fast the track steps against the clock. x1 is one step per clock pulse; /4 is one step every four pulses; x2 is two steps per pulse. Table below. |
+| Clock in (None) | None, or an input bus. None: the track follows the global clock (the Global parameters' Clock source). A bus: the track steps on that clock alone, one step per rising edge, with its own Rate, Swing and Length working against it. Give tracks different clocks and they drift against each other like separate players, and a track on its own clock needs no global clock. Run and Freeze still stop it, and a Reset restarts it on its next pulse. |
 | Swing (0%) | 0 to 50%. Holds back every second step of the track by this share of a step, for swung hats and late ghost kicks. 0% is straight, about 33% is a triplet feel and 50% is dotted. It follows the track's own Rate, and a reset puts the next step back on the beat. Other tracks are untouched. |
 | Length (16) | 1 to 64 steps. How many steps a catch grabs, and so how long the loop is. |
 | Direction (Forwards) | The order a caught loop plays its steps in. Fifteen directions, below. |
