@@ -162,7 +162,7 @@
       <tr><td>4</td><td>BREATHE</td><td>RANGE</td><td>SCALE</td></tr>
     </table></div>
     <p style="margin-top:14px"><b>TRACK</b> picks which of the eight tracks the other pots and the screen are on. It is
-    the <code>Track</code> parameter, so you can also set it from the parameter list or map it to CV.</p>
+    a setting of its own (saved in the preset), set only from this pot.</p>
     <p class="note"><b>Pots pick up where the setting is.</b> When you change page, or pick another track, the pots
     do nothing until your hand reaches the setting's current value, and then they take over. That is the disting NT's own
     pick-up behaviour, so nothing jumps.</p>
@@ -253,7 +253,6 @@
     <p>These are on the <code>Global</code> page.</p>
     <div class="tablewrap"><table class="wide">
       <tr><th>Parameter</th><th>What it does</th></tr>
-      <tr><td>Track (1)</td><td>1 to 8. The track the pots and the screen are on.</td></tr>
       <tr><td>Catch all (Off)</td><td>A momentary action: setting it to Go catches every free track (or releases all, if all are caught) and it returns to Off by itself. This is what the right pot push does. It can be mapped.</td></tr>
       <tr><td>Clock source (Internal)</td><td>Internal, External or MIDI. Internal uses the BPM below. External steps on each rising edge of the clock input. MIDI follows incoming MIDI clock.</td></tr>
       <tr><td>BPM (120)</td><td>20 to 300. The internal clock's tempo. Each pulse of an external clock counts as one beat, the same as the internal clock.</td></tr>

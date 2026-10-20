@@ -37,7 +37,7 @@ Fluke uses as little of the disting NT's own controls as it can. Buttons 1 to 4 
 | 3 | SWING | STYLE | DIRECTION |
 | 4 | BREATHE | RANGE | SCALE |
 
-**TRACK** picks which of the eight tracks the other pots and the screen are on. It is the `Track` parameter, so you can also set it from the parameter list or map it to CV.
+**TRACK** picks which of the eight tracks the other pots and the screen are on. It is a setting of its own (saved in the preset), set only from this pot.
 
 > **Pots pick up where the setting is.** When you change page, or pick another track, the pots do nothing until your hand reaches the setting's current value, and then they take over. That is the disting NT's own pick-up behaviour, so nothing jumps.
 
@@ -183,7 +183,6 @@ These are on the `Global` page.
 
 | Parameter | What it does |
 |---|---|
-| Track (1) | 1 to 8. The track the pots and the screen are on. |
 | Catch all (Off) | A momentary action: setting it to Go catches every free track (or releases all, if all are caught) and it returns to Off by itself. This is what the right pot push does. It can be mapped. |
 | Clock source (Internal) | Internal, External or MIDI. Internal uses the BPM below. External steps on each rising edge of the clock input. MIDI follows incoming MIDI clock. |
 | BPM (120) | 20 to 300. The internal clock's tempo. Each pulse of an external clock counts as one beat, the same as the internal clock. |
