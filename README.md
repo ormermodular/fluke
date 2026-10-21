@@ -14,7 +14,7 @@ Everything is on a 12 HP panel with a small screen and a single encoder. Turn th
 and hold to go into its settings, turn to scroll them, click to edit a value, double-click to finish, and click and
 hold again to come back out. Every setting is also in the right-click menu.
 
-**[Manual for VCV Rack](https://ormermodular.github.io/fluke/vcv/)** · **[Manual for disting NT](https://ormermodular.github.io/fluke/nt/)**
+<p align="center"><a href="https://ormermodular.github.io/fluke/vcv/">VCV Rack manual</a> · <a href="https://ormermodular.github.io/fluke/nt/">disting NT manual</a></p>
 
 ## Installing
 
