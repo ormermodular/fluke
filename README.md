@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/images/fluke-banner.svg" alt="Fluke by Ormer Modular" width="100%"></p>
+
 # Fluke
 
 *Eight tracks of random CV. Catch what you like and it becomes a loop.*
