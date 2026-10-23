@@ -230,8 +230,8 @@
       <tr><td>Quantise (Off)</td><td>Snaps the CV to the track's scale and root, before any Slide. Off, the CV is continuous.</td></tr>
       <tr><td>Scale (Global)</td><td>Global, or one of 13 scales for this track alone. Global follows the algorithm's Scale on the Global page.</td></tr>
       <tr><td>Root (Global)</td><td>Global, or C to B for this track alone. Global follows the algorithm's Root.</td></tr>
-      <tr><td>CV out, CV out mode</td><td>The bus the track's CV goes to (None by default), and whether it replaces what is on the bus (the default) or adds to it.</td></tr>
-      <tr><td>Gate out, Gate out mode</td><td>The same for the track's gate.</td></tr>
+      <tr><td>Gate out, Gate out mode</td><td>The bus the track's gate goes to (None by default), and whether it replaces what is on the bus (the default) or adds to it.</td></tr>
+      <tr><td>CV out, CV out mode</td><td>The same for the track's CV.</td></tr>
       <tr><td>MIDI channel (0)</td><td>0 (off) or 1 to 16. The channel this track sends MIDI notes on. See MIDI.</td></tr>
     </table></div>
     <p style="margin-top:14px">The scales are: Chromatic · Major · Natural minor · Harmonic minor · Dorian · Phrygian · Lydian · Mixolydian · Major pent · Minor pent · Blues · Hirajoshi · In-Sen. A note halfway between two scale notes snaps down.</p>
@@ -295,11 +295,11 @@
 
   <section id="routing">
     <h2>Routing</h2>
-    <p>Each track has a <b>CV out</b> and a <b>Gate out</b>. They start on <b>None</b>, so a track touches no bus until you give it one.</p>
+    <p>Each track has a <b>Gate out</b> and a <b>CV out</b>. They start on <b>None</b>, so a track touches no bus until you give it one.</p>
     <div class="tablewrap"><table class="wide">
       <tr><th>Output</th><th>What it carries</th></tr>
-      <tr><td>CV out (1 to 8)</td><td>The track's random voltage, one new value per step: 0 V up to the track's Range, or ± the Range for the bipolar settings. Held between steps (and glided, if Slide is up).</td></tr>
       <tr><td>Gate out (1 to 8)</td><td>A gate on every step that passes Chance, at the Gate level (default 5 V) for as long as Gate length says. A resting track sends none.</td></tr>
+      <tr><td>CV out (1 to 8)</td><td>The track's random voltage, one new value per step: 0 V up to the track's Range, or ± the Range for the bipolar settings. Held between steps (and glided, if Slide is up).</td></tr>
     </table></div>
     <p style="margin-top:14px">Each output has a mode: <b>Replace</b> (the default) writes the track's signal to the bus,
     and <b>Add</b> sums it onto whatever is already there.</p>

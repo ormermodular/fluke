@@ -96,8 +96,8 @@ There is a parameter page for each track (`Track 1` to `Track 8`), and every par
 | Quantise (Off) | Snaps the CV to the track's scale and root, before any Slide. Off, the CV is continuous. |
 | Scale (Global) | Global, or one of 13 scales for this track alone. Global follows the algorithm's Scale on the Global page. |
 | Root (Global) | Global, or C to B for this track alone. Global follows the algorithm's Root. |
-| CV out, CV out mode | The bus the track's CV goes to (None by default), and whether it replaces what is on the bus (the default) or adds to it. |
-| Gate out, Gate out mode | The same for the track's gate. |
+| Gate out, Gate out mode | The bus the track's gate goes to (None by default), and whether it replaces what is on the bus (the default) or adds to it. |
+| CV out, CV out mode | The same for the track's CV. |
 | MIDI channel (0) | 0 (off) or 1 to 16. The channel this track sends MIDI notes on. See MIDI. |
 
 The scales are: Chromatic · Major · Natural minor · Harmonic minor · Dorian · Phrygian · Lydian · Mixolydian · Major pent · Minor pent · Blues · Hirajoshi · In-Sen. A note halfway between two scale notes snaps down.
@@ -216,12 +216,12 @@ Set **Clock source** to **MIDI** and Fluke follows incoming MIDI clock: 24 clock
 
 ## Routing
 
-Each track has a **CV out** and a **Gate out**. They start on **None**, so a track touches no bus until you give it one.
+Each track has a **Gate out** and a **CV out**. They start on **None**, so a track touches no bus until you give it one.
 
 | Output | What it carries |
 |---|---|
-| CV out (1 to 8) | The track's random voltage, one new value per step: 0 V up to the track's Range, or ± the Range for the bipolar settings. Held between steps (and glided, if Slide is up). |
 | Gate out (1 to 8) | A gate on every step that passes Chance, at the Gate level (default 5 V) for as long as Gate length says. A resting track sends none. |
+| CV out (1 to 8) | The track's random voltage, one new value per step: 0 V up to the track's Range, or ± the Range for the bipolar settings. Held between steps (and glided, if Slide is up). |
 
 Each output has a mode: **Replace** (the default) writes the track's signal to the bus, and **Add** sums it onto whatever is already there.
 
