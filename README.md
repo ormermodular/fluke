@@ -22,9 +22,9 @@ can send its notes as MIDI as well as CV and gates.
 
 On the disting NT, three pots edit the picked track, the centre pot push turns the page, the left pot push catches
 and the right pot push catches all. Everything else is an ordinary parameter, so it maps to CV, MIDI or I²C like any
-other. A VCV Rack version is coming soon.
+other.
 
-<p align="center"><a href="https://ormermodular.github.io/fluke/vcv/">VCV Rack manual</a> · <a href="https://ormermodular.github.io/fluke/nt/">disting NT manual</a></p>
+<p align="center"><a href="https://ormermodular.github.io/fluke/nt/">disting NT manual</a></p>
 
 ## Installing
 
