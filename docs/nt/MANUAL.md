@@ -6,16 +6,14 @@ USER MANUAL · EXPERT SLEEPERS DISTING NT · v1.0.0 · FREE
 
 Fluke is a sibling to Shoal, Ormer Modular's generative melody sequencer, and a lot smaller. It is a CV generator with **eight tracks of ever-changing random voltage**. When something sounds right you **catch** it, and the last stretch that played becomes a loop. A **Mutate** setting then decides how much that loop drifts each time round, from perfectly still to slowly wandering. Each track has its own style of randomness, plus Chance, Rate, Direction, Slide and Quantise, with the key set per track or for the whole algorithm. On the disting NT it takes three pots and two pushes: **three pots** for the track's settings, **the left pot push to catch** and **the right pot push to catch all**. Everything else is an ordinary parameter, so it can be mapped to CV, MIDI or I²C like any other. Fluke also sends MIDI notes, and can be clocked from MIDI.
 
-## The screen
+On the disting NT the screen shows a whale's tail rising from a night sea. The picked track and its tempo are along the top, the three pots' names and levels along the bottom. The HTML manual runs the real screen live.
 
-Fluke replaces the usual parameter line with its own screen: a whale's tail rising from a night sea. Each track that fires opens a ripple on the water (a caught loop's ripple is brighter), and any firing makes the tail dip and throw a few drops.
-
-- **Top left:** the picked track, and `CAUGHT` when it has a loop. Under it, for three seconds after you turn a pot, the name and value of the setting you moved. It fades away when you stop turning.
-- **Top, right of centre:** what the two pot pushes do right now. `PUSH L: CATCH` or `RELEASE` for the picked track, `R: CATCH ALL` or `RELEASE ALL` for every track.
+- **Top left:** the picked track, and `CAUGHT` when it has a loop. Under it, for three seconds after you turn a pot, the name and value of the setting you moved. It fades away when you stop turning. (Moving the Track pot shows nothing here: the track is already named above.)
+- **Top, right of centre:** what the two pot pushes do right now: `PUSH L: CATCH` or `RELEASE` for the picked track, `R: CATCH ALL` or `RELEASE ALL` for every track.
 - **Top right:** the tempo (`120 BPM`), or `EXT` when a clock cable sets it, or `MIDI` when it follows MIDI clock.
 - **Bottom:** the name of what each of the three pots does on this page, each with a small level bar, and four dots for the page you are on.
 
-## Controls
+## The pots
 
 Fluke uses as little of the disting NT's own controls as it can. Buttons 1 to 4 and the left encoder push do their usual jobs, so you can always get out or into the parameter list.
 
@@ -192,7 +190,7 @@ These are on the `Global` page.
 | Root (C) | The key note of that scale, for every track whose Root is Global. |
 | Gate length (50%) | 5 to 100%. How long every gate stays high, as a share of the step. |
 | Gate level (5 V) | 1 to 10 V. The height of every gate. |
-| Clock input (1) | The bus an external clock arrives on. |
+| Clock input (None) | The bus an external clock arrives on. Used when Clock source is External. |
 | Reset input (None) | The bus a reset trigger arrives on. A rising edge restarts every track from the beginning of its pass on the next clock pulse. |
 | Catch all input (None) | The bus a trigger arrives on to do what Catch all does. |
 | MIDI dest, MIDI velocity, MIDI note at 0V | See MIDI. |
@@ -225,17 +223,27 @@ Each track has a **Gate out** and a **CV out**. They start on **None**, so a tra
 
 Each output has a mode: **Replace** (the default) writes the track's signal to the bus, and **Add** sums it onto whatever is already there.
 
-## Presets
+## On the disting NT
 
-A preset saves every parameter, and each caught track's loop with its hit pattern, so a preset reloads exactly as you left it. **Caught** is a parameter, so a preset, or a mapped CV, can catch and release a track.
-
-## Installing
+### Installing
 
 Fluke is free. It needs **disting NT firmware 1.19 or later**.
 
-1. Copy `fluke.o` to the `programs/plug-ins` folder on the disting NT's SD card.
+1. Copy `fluke.o` into the `programs/plug-ins` folder on the disting NT's SD card (a subfolder is fine).
 2. Put the card back and start the disting NT (or rescan the plug-ins).
 3. Add **Fluke** to a preset: it is in the algorithm list under its name.
+
+### Presets
+
+A preset saves every parameter, and each caught track's loop with its hit pattern, so a preset reloads exactly as you left it. **Caught** is a parameter, so a preset, or a mapped CV, can catch and release a track.
+
+### Mapping
+
+Every setting is an ordinary parameter, so it can be mapped to CV, MIDI or I²C from the parameter list. Map **Caught** or **Catch all** to a gate or a button to catch from a patch.
+
+### The pot pushes
+
+The left pot push (catch) and right pot push (catch all) are Fluke's own on its screen. Everything else the disting NT does with its buttons and left encoder push is unchanged.
 
 ## Troubleshooting
 

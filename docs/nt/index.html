@@ -98,6 +98,27 @@
   .steps table td:first-child{white-space:nowrap}
   .steps td:nth-child(3),.steps td:nth-child(4){color:var(--muted);white-space:nowrap}
 </style>
+<style>
+  /* the live disting NT screen */
+  .panel{background:linear-gradient(180deg,#232b35,#1a212a);border:1px solid var(--panel-edge);
+    border-radius:12px;padding:22px 26px 24px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .screw{position:absolute;width:8px;height:8px;border-radius:50%;background:#0f141b;border:1px solid #444f5c}
+  .screw.tl{top:10px;left:10px}.screw.tr{top:10px;right:10px}
+  .screw.bl{bottom:10px;left:10px}.screw.br{bottom:10px;right:10px}
+  .screenframe{background:#0e141c;border:1px solid #05080c;border-radius:6px;padding:10px;
+    box-shadow:inset 0 2px 10px rgba(0,0,0,.8),0 0 34px rgba(140,190,255,.13)}
+  canvas{display:block;width:100%;image-rendering:pixelated;background:#04070b}
+  canvas.screen{aspect-ratio:4/1}
+  .ctlrow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}
+  @media (max-width:560px){.ctlrow{grid-template-columns:1fr}}
+  .ctlrow label{display:flex;flex-direction:column;gap:6px;font-size:10.5px;letter-spacing:.16em;
+    color:var(--accent);text-transform:uppercase}
+  .ctlrow label span.read{color:var(--ink);letter-spacing:.08em;text-transform:none}
+  .ctlrow input[type=range]{width:100%;accent-color:var(--accent)}
+  .panel .seg{margin-top:14px;width:max-content;max-width:100%;flex-wrap:wrap}
+  .cap{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:10px;max-width:70ch}
+  .cap b{color:var(--ink)}
+</style>
 
 <div class="wrap">
 
@@ -115,33 +136,46 @@
     <b>the right pot push to catch all</b>. Everything else is an ordinary parameter, so it can be mapped
     to CV, MIDI or I²C like any other. Fluke also sends MIDI notes, and can be clocked from MIDI.</p>
     <nav class="toc">
-      <a href="#screen">The screen</a><a href="#controls">Controls</a>
+      <a href="#screen">The screen</a><a href="#pots">The pots</a>
       <a href="#catch">Catching a loop</a><a href="#tracks">Track parameters</a>
       <a href="#global">Global parameters</a><a href="#midi">MIDI</a>
-      <a href="#routing">Routing</a><a href="#presets">Presets</a>
-      <a href="#install">Installing</a><a href="#trouble">Troubleshooting</a>
-      <a href="#specs">Specifications</a>
+      <a href="#routing">Routing</a><a href="#nt">On the disting NT</a>
+      <a href="#trouble">Troubleshooting</a><a href="#specs">Specifications</a>
     </nav>
   </header>
 
-  <section id="screen">
-    <h2>The screen</h2>
-    <img alt="The Fluke screen on the disting NT: a whale's tail rising from a night sea, the track name and BPM along the top, and three pot labels along the bottom" src="data:image/png;base64,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" style="width:100%;max-width:768px;image-rendering:pixelated;border:1px solid var(--panel-edge);border-radius:6px;display:block">
-    <p style="margin-top:12px">Fluke replaces the usual parameter line with its own screen: a whale's tail rising from a night
-    sea. Each track that fires opens a ripple on the water (a caught loop's ripple is brighter), and any
-    firing makes the tail dip and throw a few drops.</p>
+  <section class="panel" id="screen">
+    <span class="screw tl"></span><span class="screw tr"></span>
+    <span class="screw bl"></span><span class="screw br"></span>
+    <!--hero-->
+    <div class="screenframe"><canvas id="hero" class="screen" width="256" height="64" aria-label="The Fluke screen, animated"></canvas></div>
+    <div class="ctlrow">
+      <label><span data-potlabel>TRACK</span><input type="range" data-pot aria-label="Left pot" min="0" max="7" value="0"><span class="read" data-potread></span></label>
+      <label><span data-potlabel>MUTATE</span><input type="range" data-pot aria-label="Centre pot" min="0" max="100" value="0"><span class="read" data-potread></span></label>
+      <label><span data-potlabel>CHANCE</span><input type="range" data-pot aria-label="Right pot" min="0" max="100" value="100"><span class="read" data-potread></span></label>
+    </div>
+    <div class="seg" role="group" aria-label="Pushes">
+      <button type="button" id="btnPage">Next page (centre pot push)</button>
+      <button type="button" id="btnCatch">Catch (left pot push)</button>
+      <button type="button" id="btnCatchAll">Catch all (right pot push)</button>
+    </div>
+    <p class="cap">This is the real screen, drawn by the same code as the plug-in (the lettering is a plain stand-in for the
+    disting NT's own font). Move the sliders as you would the three pots, and press the buttons for the pushes. Each
+    track that fires opens a ripple on the water, and a caught loop's ripple is brighter.</p>
+    <!--/hero-->
     <ul>
       <li><b>Top left:</b> the picked track, and <code>CAUGHT</code> when it has a loop. Under it, for three seconds after you
-      turn a pot, the name and value of the setting you moved. It fades away when you stop turning.</li>
-      <li><b>Top, right of centre:</b> what the two pot pushes do right now. <code>PUSH L: CATCH</code> or
+      turn a pot, the name and value of the setting you moved. It fades away when you stop turning. (Moving the Track pot
+      shows nothing here: the track is already named above.)</li>
+      <li><b>Top, right of centre:</b> what the two pot pushes do right now: <code>PUSH L: CATCH</code> or
       <code>RELEASE</code> for the picked track, <code>R: CATCH ALL</code> or <code>RELEASE ALL</code> for every track.</li>
       <li><b>Top right:</b> the tempo (<code>120 BPM</code>), or <code>EXT</code> when a clock cable sets it, or <code>MIDI</code> when it follows MIDI clock.</li>
       <li><b>Bottom:</b> the name of what each of the three pots does on this page, each with a small level bar, and four dots for the page you are on.</li>
     </ul>
   </section>
 
-  <section id="controls">
-    <h2>Controls</h2>
+  <section id="pots">
+    <h2>The pots</h2>
     <p>Fluke uses as little of the disting NT's own controls as it can. Buttons 1 to 4 and the left encoder push
     do their usual jobs, so you can always get out or into the parameter list.</p>
     <div class="tablewrap"><table class="wide">
@@ -262,7 +296,7 @@
       <tr><td>Root (C)</td><td>The key note of that scale, for every track whose Root is Global.</td></tr>
       <tr><td>Gate length (50%)</td><td>5 to 100%. How long every gate stays high, as a share of the step.</td></tr>
       <tr><td>Gate level (5 V)</td><td>1 to 10 V. The height of every gate.</td></tr>
-      <tr><td>Clock input (1)</td><td>The bus an external clock arrives on.</td></tr>
+      <tr><td>Clock input (None)</td><td>The bus an external clock arrives on. Used when Clock source is External.</td></tr>
       <tr><td>Reset input (None)</td><td>The bus a reset trigger arrives on. A rising edge restarts every track from the beginning of its pass on the next clock pulse.</td></tr>
       <tr><td>Catch all input (None)</td><td>The bus a trigger arrives on to do what Catch all does.</td></tr>
       <tr><td>MIDI dest, MIDI velocity, MIDI note at 0V</td><td>See MIDI.</td></tr>
@@ -305,20 +339,25 @@
     and <b>Add</b> sums it onto whatever is already there.</p>
   </section>
 
-  <section id="presets">
-    <h2>Presets</h2>
-    <p>A preset saves every parameter, and each caught track's loop with its hit pattern, so a preset reloads exactly as you
-    left it. <b>Caught</b> is a parameter, so a preset, or a mapped CV, can catch and release a track.</p>
-  </section>
-
-  <section id="install">
-    <h2>Installing</h2>
+  <section id="nt">
+    <h2>On the disting NT</h2>
+    <h3>Installing</h3>
     <p>Fluke is free. It needs <b>disting NT firmware 1.19 or later</b>.</p>
     <ol>
-      <li>Copy <code>fluke.o</code> to the <code>programs/plug-ins</code> folder on the disting NT's SD card.</li>
+      <li>Copy <code>fluke.o</code> into the <code>programs/plug-ins</code> folder on the disting NT's SD card
+      (a subfolder is fine).</li>
       <li>Put the card back and start the disting NT (or rescan the plug-ins).</li>
       <li>Add <b>Fluke</b> to a preset: it is in the algorithm list under its name.</li>
     </ol>
+    <h3>Presets</h3>
+    <p>A preset saves every parameter, and each caught track's loop with its hit pattern, so a preset reloads exactly as you
+    left it. <b>Caught</b> is a parameter, so a preset, or a mapped CV, can catch and release a track.</p>
+    <h3>Mapping</h3>
+    <p>Every setting is an ordinary parameter, so it can be mapped to CV, MIDI or I²C
+    from the parameter list. Map <b>Caught</b> or <b>Catch all</b> to a gate or a button to catch from a patch.</p>
+    <h3>The pot pushes</h3>
+    <p>The left pot push (catch) and right pot push (catch all) are Fluke's own on its screen. Everything else the disting NT
+    does with its buttons and left encoder push is unchanged.</p>
   </section>
 
   <section id="trouble">
@@ -372,3 +411,319 @@
     <p class="fin">catch it</p>
   </footer>
 </div>
+
+<script>
+// The Fluke disting NT display for the manual: a port of draw() in nt/fluke_nt.cpp onto a 256x64 canvas, so
+// the picture is the plug-in's own drawing code (a whale's tail rising from a night sea, a ripple for every
+// track that fires), driven by sliders that stand in for the three pots and buttons for the pushes. Keep it in
+// step with draw(): tools/check-nt-screen-port.sh renders scenes both ways and fails on a single differing pixel.
+// The plug-in's own font is not available here: the labels use plain 3x5 capitals (lower case is drawn as
+// capitals), the same as the check's reference.
+(function () {
+  var cv = document.getElementById('hero');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+
+  // ---- canvas helpers (same shapes as NT_drawShapeI / NT_drawText) ------------------------
+  function shade(c) {
+    var a = c / 15; a = a * (0.55 + 0.45 * a);
+    return 'rgb(' + Math.round(8 + a * 225) + ',' + Math.round(10 + a * 235) + ',' + Math.round(14 + a * 241) + ')';
+  }
+  function P(x, y, c) { if (x < 0 || x > 255 || y < 0 || y > 63) return; ctx.fillStyle = shade(Math.max(0, Math.min(15, c))); ctx.fillRect(x, y, 1, 1); }
+  function rect(x0, y0, x1, y1, c) { for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) P(x, y, c); }
+  function line(x0, y0, x1, y1, c) {
+    var dx = x1 - x0, dy = y1 - y0, n = Math.max(Math.abs(dx), Math.abs(dy));
+    if (!n) { P(x0, y0, c); return; }
+    for (var i = 0; i <= n; i++) P(x0 + Math.trunc(dx * i / n), y0 + Math.trunc(dy * i / n), c);
+  }
+  var G = {
+    'A': '010101111101101', 'B': '110101110101110', 'C': '011100100100011', 'D': '110101101101110',
+    'E': '111100110100111', 'F': '111100110100100', 'G': '011100101101011', 'H': '101101111101101',
+    'I': '111010010010111', 'J': '001001001101010', 'K': '101101110101101', 'L': '100100100100111',
+    'M': '101111111101101', 'N': '110101101101101', 'O': '010101101101010', 'P': '110101110100100',
+    'Q': '010101101111011', 'R': '110101110101101', 'S': '011100010001110', 'T': '111010010010010',
+    'U': '101101101101111', 'V': '101101101101010', 'W': '101101111111101', 'X': '101101010101101',
+    'Y': '101101010010010', 'Z': '111001010100111',
+    '0': '111101101101111', '1': '010110010010111', '2': '110001010100111', '3': '110001110001110',
+    '4': '101101111001001', '5': '111100110001110', '6': '011100111101111', '7': '111001010010010',
+    '8': '111101111101111', '9': '111101111001110',
+    ':': '000010000010000', '%': '101001010100101', '/': '001001010100100', '.': '000000000000010',
+    '+': '000010111010000', '-': '000000111000000'
+  };
+  // y is the baseline; align 'l' | 'r' | 'c'. Every string is cut at 47 characters, like appendStr.
+  function text(x, y, s, c, align) {
+    s = s.slice(0, 47).toUpperCase();
+    var w = s.length * 4 - 1;
+    var x0 = align === 'c' ? x - Math.trunc(w / 2) : (align === 'r' ? x - w : x), yT = y - 4;
+    for (var i = 0; i < s.length; i++) {
+      var g = G[s[i]]; if (!g) continue;
+      for (var r = 0; r < 5; r++) for (var k = 0; k < 3; k++)
+        if (g[r * 3 + k] === '1') P(x0 + i * 4 + k, yT + r, c);
+    }
+  }
+  function clampi(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
+  function seg(x0, y0, x1, y1, c) { line(clampi(x0, 0, 255), clampi(y0, 0, 63), clampi(x1, 0, 255), clampi(y1, 0, 63), clampi(c, 0, 15)); }
+  function block(x0, y0, x1, y1, c) { rect(clampi(x0, 0, 255), clampi(y0, 0, 63), clampi(x1, 0, 255), clampi(y1, 0, 63), clampi(c, 0, 15)); }
+  function point(x, y, c) { P(x, y, c); }
+
+  // ---- the plug-in's tables ----------------------------------------------------------------
+  function hash(a, b) {
+    var x = (Math.imul(a >>> 0, 0x9E3779B1) ^ Math.imul(b >>> 0, 0x85EBCA77)) >>> 0;
+    x = (x ^ (x >>> 15)) >>> 0;
+    x = Math.imul(x, 0x2C1B3C6D) >>> 0;
+    x = (x ^ (x >>> 12)) >>> 0;
+    return x;
+  }
+  var kHorizonY = 26, kWaterY = 36, kTailX = 128;
+  var kMark = [6147, 7175, 3870, 4030, 2044, 496, 224, 224, 224, 0, 7967];
+  function markCell(r, c) { return r >= 0 && r < 11 && c >= 0 && c < 13 && (kMark[r] & (1 << (12 - c))) !== 0; }
+  var kCos16 = [100, 92, 71, 38, 0, -38, -71, -92, -100, -92, -71, -38, 0, 38, 71, 92];
+  var kSin16 = [0, 38, 71, 92, 100, 92, 71, 38, 0, -38, -71, -92, -100, -92, -71, -38];
+  var DIP = [3, 3, 2, 2, 1, 1, 1, 0, 0];
+  var SWAY = [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0];
+  var kPopSamples = 48000 * 3;
+
+  // enum names, as in the plug-in (the manual build checks them against nt/fluke_nt.cpp)
+  var STYLES = ['Open', 'Midwater', 'Shallows', 'Squall', 'Tide', 'Current', 'Deep'];
+  var RATES = ['/64', '/32', '/16', '/8', '/7', '/6', '/5.3', '/5', '/4', '/3', '/2.6', '/2', '/1.5', 'x1',
+    'x1.25', 'x1.3', 'x1.5', 'x2', 'x2.6', 'x3', 'x4', 'x5', 'x5.3', 'x6', 'x7', 'x8', 'x16', 'x32', 'x64'];
+  var DIRECTIONS = ['Forwards', 'Reverse', 'Pendulum', 'Random', 'Drunk', 'Pong', 'Tide', 'Shuffle', 'Pools',
+    'Stride', 'Gravity', 'Converge', 'Diverge', 'Skitter', 'Anchor'];
+  var RANGES = ['0 to 1V', '0 to 2V', '0 to 3V', '0 to 5V', '0 to 10V', '+-1V', '+-2V', '+-3V', '+-5V', '+-10V'];
+  var SCALES = ['Global', 'Chromatic', 'Major', 'Natural minor', 'Harmonic minor', 'Dorian', 'Phrygian', 'Lydian',
+    'Mixolydian', 'Major pent', 'Minor pent', 'Blues', 'Hirajoshi', 'In-Sen'];
+  var TRACKS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  // the engine's rate table (rateMult / rateDiv); the manual build checks it against src/fluke_engine.hpp
+  var RATE_MULT = [1, 1, 1, 1, 1, 1, 10, 1, 1, 1, 5, 1, 2, 1, 5, 13, 3, 2, 13, 3, 4, 5, 53, 6, 7, 8, 16, 32, 64];
+  var RATE_DIV = [64, 32, 16, 8, 7, 6, 53, 5, 4, 3, 13, 2, 3, 1, 4, 10, 2, 1, 5, 1, 1, 1, 10, 1, 1, 1, 1, 1, 1];
+
+  // parameters the pots edit: name (the parameter's own), min, max, enum names, unit (a '%' follows a percent)
+  var DEF = {
+    track:     { name: 'Track',     min: 0, max: 7,  names: TRACKS },
+    mutate:    { name: 'Mutate',    min: 0, max: 100, pct: true },
+    chance:    { name: 'Chance',    min: 0, max: 100, pct: true },
+    slide:     { name: 'Slide',     min: 0, max: 100, pct: true },
+    rate:      { name: 'Rate',      min: 0, max: 28, names: RATES },
+    length:    { name: 'Length',    min: 1, max: 64 },
+    swing:     { name: 'Swing',     min: 0, max: 50, pct: true },
+    style:     { name: 'Style',     min: 0, max: 6,  names: STYLES },
+    direction: { name: 'Direction', min: 0, max: 14, names: DIRECTIONS },
+    breathe:   { name: 'Breathe',   min: 0, max: 100, pct: true },
+    range:     { name: 'Range',     min: 0, max: 9,  names: RANGES },
+    scale:     { name: 'Scale',     min: 0, max: 13, names: SCALES }
+  };
+  // the four pages of three: what each pot edits, and its name on the strip
+  var PAGES = [
+    [['track', 'TRACK'], ['mutate', 'MUTATE'], ['chance', 'CHANCE']],
+    [['slide', 'SLIDE'], ['rate', 'RATE'], ['length', 'LENGTH']],
+    [['swing', 'SWING'], ['style', 'STYLE'], ['direction', 'DIRECTION']],
+    [['breathe', 'BREATHE'], ['range', 'RANGE'], ['scale', 'SCALE']]
+  ];
+
+  // ---- state: what draw() reads from the algorithm instance ---------------------------------
+  function trackDefaults() { return { mutate: 0, chance: 100, slide: 0, rate: 13, length: 16, swing: 0, style: 0, direction: 0, breathe: 0, range: 3, scale: 0 }; }
+  var S = {
+    track: 0, page: 0, bpm: 120, clockSource: 0,
+    tv: [], caught: [], steps: [], lastFired: [],
+    samples: 0, popStart: 0, popKey: null, popTrack: 0,
+    drawTick: 0, lastSteps: [], rippleAge: [], rippleStrong: [], flickAge: 999, flickStrong: 0
+  };
+  for (var t0 = 0; t0 < 8; t0++) {
+    S.tv.push(trackDefaults()); S.caught.push(false); S.steps.push(0); S.lastFired.push(false);
+    S.lastSteps.push(0); S.rippleAge.push(999); S.rippleStrong.push(0);
+  }
+  function value(key, track) { return key === 'track' ? S.track : S.tv[track][key]; }
+
+  // ---- draw(), line for line ----------------------------------------------------------------
+  function draw() {
+    ctx.fillStyle = shade(0); ctx.fillRect(0, 0, 256, 64);
+    var sel = clampi(S.track, 0, 7);
+    S.drawTick++;
+    var tick = S.drawTick, t, i;
+
+    // who fired since the last frame
+    for (t = 0; t < 8; t++) {
+      if (S.steps[t] !== S.lastSteps[t]) {
+        S.lastSteps[t] = S.steps[t];
+        if (S.lastFired[t]) {
+          S.rippleAge[t] = 0;
+          S.rippleStrong[t] = S.caught[t] ? 1 : 0;
+          S.flickAge = 0;
+          if (S.caught[t] || t === sel) S.flickStrong = 1;
+        }
+      } else if (S.rippleAge[t] < 999) S.rippleAge[t]++;
+    }
+    if (S.flickAge < 999) S.flickAge++;
+
+    // sky: stars that twinkle, the horizon
+    for (i = 0; i < 18; i++) {
+      var h = hash(11 + i, 7);
+      var x = h % 256, y = (h >>> 9) % 22;
+      if (x < 72 && y < 17) continue;
+      point(x, y, 2 + ((Math.floor(tick / 14) + i * 3) & 3));
+    }
+    seg(0, kHorizonY - 1, 255, kHorizonY - 1, 2);
+    seg(0, kHorizonY, 255, kHorizonY, 4);
+
+    // ripples: one per track along the surface, opening and fading after each step
+    for (t = 0; t < 8; t++) {
+      var age = S.rippleAge[t];
+      if (age > 34) continue;
+      var cx = 18 + t * 31 + ((t & 1) ? 4 : -2);
+      var cy = 40 + ((t * 5) % 3) * 3;
+      var rx = 2 + age, ry = 1 + Math.trunc(age / 4);
+      var base = S.rippleStrong[t] ? 13 : 8;
+      var c = 1 + Math.trunc(base * (34 - age) / 34);
+      for (var k = 0; k < 16; k++) {
+        var k2 = (k + 1) & 15;
+        seg(cx + Math.trunc(rx * kCos16[k] / 100), cy + Math.trunc(ry * kSin16[k] / 100),
+            cx + Math.trunc(rx * kCos16[k2] / 100), cy + Math.trunc(ry * kSin16[k2] / 100), c);
+      }
+    }
+
+    // the tail: it breathes, and dips when a track fires
+    var dy = 0;
+    if (S.flickAge < 9) {
+      dy = DIP[S.flickAge];
+      if (!S.flickStrong && dy > 0) dy -= 1;
+    } else S.flickStrong = 0;
+    dy += SWAY[(Math.floor(tick / 8)) & 15];
+    var x0 = kTailX - 13, y0 = kWaterY - 18 + dy, r, cc;
+
+    // the reflection first, wavering and dim, mirrored below the waterline
+    for (r = 0; r < 9; r++) for (cc = 0; cc < 13; cc++) if (markCell(r, cc)) {
+      var wob = ((Math.floor(tick / 6) + r) & 1) ? 1 : 0;
+      var yy = kWaterY + 2 + (8 - r);
+      seg(x0 + cc * 2 + wob, yy, x0 + cc * 2 + 1 + wob, yy, 2 + (r < 3 ? 1 : 0));
+    }
+    for (r = 0; r < 9; r++) for (cc = 0; cc < 13; cc++) {
+      if (!markCell(r, cc)) continue;
+      var col = cc >= 7 ? 9 : 12;
+      if (!markCell(r - 1, cc)) col = 15;
+      block(x0 + cc * 2, y0 + r * 2, x0 + cc * 2 + 1, y0 + r * 2 + 1, col);
+    }
+    // the waterline either side of the stalk, with foam that swells on a dip
+    for (cc = 0; cc < 13; cc++) if (markCell(10, cc)) block(x0 + cc * 2, kWaterY, x0 + cc * 2 + 1, kWaterY + 1, 7);
+    if (dy >= 2) block(x0 + 10, kWaterY, x0 + 15, kWaterY + 1, 11);
+    // drops thrown from the flukes
+    if (S.flickAge < 14 && S.flickStrong)
+      for (i = 0; i < 6; i++) {
+        var hh = hash(300 + i, 3);
+        var side = (i & 1) ? 1 : -1, dage = S.flickAge;
+        var dx = kTailX + side * (14 + (hh % 5) + Math.trunc(dage * (1 + ((hh >>> 5) % 2)) / 2));
+        var dyy = kWaterY - 16 - ((hh >>> 9) % 4) + Math.trunc(dage * dage / 6) - dage * 2;
+        if (dyy < kWaterY) point(clampi(dx, 0, 255), clampi(dyy, 0, 63), clampi(13 - Math.trunc(dage / 2), 0, 15));
+      }
+
+    // the track's name, in the sky
+    var hb = 'TRACK ' + (sel + 1);
+    if (S.caught[sel]) hb += '  CAUGHT';
+    text(2, 7, hb, 15, 'l');
+    // the value of the parameter a pot just changed, for a few seconds
+    if (S.popKey !== null && ((S.samples - S.popStart) >>> 0) < kPopSamples) {
+      var d = DEF[S.popKey], nm = '';
+      for (var pg = 0; pg < 4 && !nm; pg++) for (var kk = 0; kk < 3; kk++) {
+        var pk = PAGES[pg][kk][0];
+        if (pk === S.popKey && (pk === 'track' || S.popTrack === sel)) { nm = PAGES[pg][kk][1]; break; }
+      }
+      if (!nm) nm = d.name;
+      var pv = value(S.popKey, S.popTrack);
+      var vt = d.names ? d.names[pv - d.min] : String(pv) + (d.pct ? '%' : '');
+      text(2, 14, nm + '  ' + vt, 13, 'l');
+    }
+    var bt = S.clockSource === 0 ? (Math.trunc(S.bpm + 0.5) + ' BPM') : (S.clockSource === 2 ? 'MIDI' : 'EXT');
+    text(253, 7, bt, 6, 'r');
+    // the two pot pushes are live tools: always labelled
+    var all = true;
+    for (t = 0; t < 8; t++) if (!S.caught[t]) all = false;
+    text(214, 7, 'PUSH L: ' + (S.caught[sel] ? 'RELEASE' : 'CATCH') + '  R: ' + (all ? 'RELEASE ALL' : 'CATCH ALL'), 7, 'r');
+
+    // the strip: what the three pots do on this page, each with a small level bar
+    var cxs = [43, 128, 213];
+    block(0, 54, 255, 63, 0);
+    for (i = 0; i < 3; i++) {
+      var key = PAGES[S.page][i][0], pd = DEF[key], range = pd.max - pd.min;
+      var fill = range > 0 ? Math.trunc(((value(key, sel) - pd.min) * 28 + Math.trunc(range / 2)) / range) : 0;
+      seg(cxs[i] - 14, 56, cxs[i] + 14, 56, 3);
+      if (fill > 0) seg(cxs[i] - 14, 56, cxs[i] - 14 + fill, 56, 11);
+      seg(cxs[i] - 14 + fill, 55, cxs[i] - 14 + fill, 57, 13);
+      text(cxs[i], 63, PAGES[S.page][i][1], S.page === 3 ? 7 : 12, 'c');
+    }
+    for (var p = 0; p < 4; p++) block(3 + p * 4, 60, 5 + p * 4, 62, p === S.page ? 13 : 3);
+  }
+
+  // ---- the demo: eight tracks stepping against a 120 BPM clock; the sliders are the pots ----
+  // (this part is not draw(): it only moves the state that draw() reads)
+  var FPS = 30, hist = [], mem = [], pos = [], acc = [], seed = 12345;
+  function rnd() { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return (seed >>> 8) / 16777216; }
+  var startRates = [13, 13, 17, 11, 13, 20, 9, 13];
+  for (var q = 0; q < 8; q++) { S.tv[q].rate = startRates[q]; hist.push([]); mem.push(null); pos.push(0); acc.push(q * 3); }
+  function beatFrames() { return FPS * 60 / S.bpm; }
+  function stepTrack(t) {
+    var tv = S.tv[t], fired;
+    if (S.caught[t] && mem[t]) {
+      var L = mem[t].length;
+      if (pos[t] > 0 && pos[t] % L === 0)
+        for (var j = 0; j < L; j++) if (rnd() * 100 < tv.mutate) mem[t][j] = rnd() * 100 < tv.chance;
+      fired = mem[t][pos[t] % L];
+      pos[t]++;
+    } else fired = rnd() * 100 < tv.chance;
+    hist[t].push(fired); if (hist[t].length > 64) hist[t].shift();
+    S.steps[t]++; S.lastFired[t] = fired;
+  }
+  function catchTrack(t) {
+    if (S.caught[t]) { S.caught[t] = false; mem[t] = null; return; }
+    var n = Math.min(S.tv[t].length, hist[t].length);
+    if (n < 1) return;
+    mem[t] = hist[t].slice(hist[t].length - n); pos[t] = 0; S.caught[t] = true;
+  }
+  function step() {
+    S.samples += 1600;
+    for (var t = 0; t < 8; t++) {
+      var iv = beatFrames() * RATE_DIV[S.tv[t].rate] / RATE_MULT[S.tv[t].rate];
+      acc[t] += 1;
+      if (acc[t] >= iv) { acc[t] -= iv; stepTrack(t); }
+    }
+    draw();
+  }
+
+  // ---- the controls: three sliders (the pots), three buttons (the pushes) ---------------------
+  var sliders = document.querySelectorAll('[data-pot]'), labels = document.querySelectorAll('[data-potlabel]'), reads = document.querySelectorAll('[data-potread]');
+  function show(i) {
+    var key = PAGES[S.page][i][0], d = DEF[key], v = value(key, S.track);
+    reads[i].textContent = d.names ? d.names[v - d.min] : v + (d.pct ? '%' : '');
+  }
+  function seed3() {
+    for (var i = 0; i < 3; i++) {
+      var key = PAGES[S.page][i][0], d = DEF[key];
+      labels[i].textContent = PAGES[S.page][i][1];
+      sliders[i].min = d.min; sliders[i].max = d.max; sliders[i].value = value(key, S.track);
+      show(i);
+    }
+  }
+  function onSlide(i) {
+    var key = PAGES[S.page][i][0], v = +sliders[i].value;
+    if (key === 'track') { S.track = v; seed3(); return; }
+    S.tv[S.track][key] = v;
+    S.popKey = key; S.popTrack = S.track; S.popStart = S.samples;
+    show(i);
+  }
+  for (var si = 0; si < sliders.length; si++) (function (i) { sliders[i].addEventListener('input', function () { onSlide(i); }); })(si);
+  var bL = document.getElementById('btnCatch'), bR = document.getElementById('btnCatchAll'), bC = document.getElementById('btnPage');
+  if (bL) bL.addEventListener('click', function () { catchTrack(S.track); });
+  if (bR) bR.addEventListener('click', function () {
+    var all = S.caught.every(function (x) { return x; });
+    for (var t = 0; t < 8; t++) if (all ? S.caught[t] : !S.caught[t]) catchTrack(t);
+  });
+  if (bC) bC.addEventListener('click', function () { S.page = (S.page + 1) % 4; seed3(); });
+  seed3();
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    for (var w = 0; w < 120; w++) step();
+    var redraw = function () { draw(); };
+    for (var rs = 0; rs < sliders.length; rs++) sliders[rs].addEventListener('input', redraw);
+    [bL, bR, bC].forEach(function (b) { if (b) b.addEventListener('click', redraw); });
+  } else setInterval(step, 1000 / FPS);
+  window.__flukeDemo = { state: S, draw: draw, step: step, tables: { STYLES: STYLES, RATES: RATES, DIRECTIONS: DIRECTIONS, RANGES: RANGES, SCALES: SCALES, RATE_MULT: RATE_MULT, RATE_DIV: RATE_DIV } };
+})();
+</script>
